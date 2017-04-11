@@ -18,17 +18,19 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   function ajaxRequest(method, url, callback) {
+   function ajaxRequest(method, url, postParams, callback) {
       var xmlhttp = new XMLHttpRequest();
 
+      xmlhttp.open(method, url, true);
+      xmlhttp.setRequestHeader("Content-type", "application/json");
+      
       xmlhttp.onreadystatechange = function () {
          if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             callback(xmlhttp.response);
          }
       };
-
-      xmlhttp.open(method, url, true);
-      xmlhttp.send();
+      
+      xmlhttp.send(JSON.stringify(postParams));
    }
    
    function populateDropdown(data) {
@@ -46,7 +48,7 @@
       select.appendChild(docfrag);
    }
    
-   ready(ajaxRequest('GET', pollsApiUrl, populateDropdown));
+   ready(ajaxRequest('GET', pollsApiUrl, null, populateDropdown));
    
    addButton.addEventListener('click', function () {
       window.location.href = "poll-add.html";
@@ -54,9 +56,11 @@
    }, false);
    
    deleteButton.addEventListener('click', function () {
-      ajaxRequest('DELETE', pollsApiUrl, function () {
-         ajaxRequest('GET', pollsApiUrl, populateDropdown);
+      var selectedPoll = document.getElementById("existing-poll-list");
+      
+      ajaxRequest('POST', pollsApiUrl + "delete", {selectedpoll: selectedPoll.value}, function () {
+         ajaxRequest('GET', pollsApiUrl, null, populateDropdown);
       });
-
+      
    }, false);
 })();

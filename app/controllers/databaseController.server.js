@@ -26,6 +26,7 @@ function databaseController (db) {
 
     this.deletePoll = function (req, res) {
         console.log("deletePoll");
+        console.log(req.body.selectedpoll);
     };
     
     function showCollection(){
