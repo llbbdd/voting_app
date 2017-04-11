@@ -1,17 +1,22 @@
 'use strict';
 
-var AuthorDashboardController = require(process.cwd() + '/app/controllers/authorDashboardController.server.js');
+var databaseController = require(process.cwd() + '/app/controllers/databaseController.server.js');
 
 module.exports = function (app, db) {
-    var aDController = new AuthorDashboardController(db);
+    var dbController = new databaseController(db);
 
     app.route('/')
         .get(function (req, res) {
         res.sendFile(process.cwd() + '/public/author-dashboard.html');
     });
+    
+    app.route('/poll-add.html')
+        .get(function (req, res) {
+        res.sendFile(process.cwd() + '/public/poll-add.html');
+    });
 
     app.route('/api/polls')
-        .get(aDController.getPolls)
-        .post(aDController.addPoll)
-        .delete(aDController.deletePoll);
+        .get(dbController.getPolls)
+        .post(dbController.addPoll)
+        .delete(dbController.deletePoll);
 };

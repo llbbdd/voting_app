@@ -1,13 +1,13 @@
 'use strict';
+var qs = require('querystring');
+const POLL_PROJECTION = { '_id': false };
 
-const CLICK_PROJECTION = { '_id': false };
-
-function authorDashboardController (db) {
+function databaseController (db) {
     var polls = db.collection('polls');
 
     this.getPolls = function (req, res) {
         console.log("getPolls");
-        /*polls.findOne({}, CLICK_PROJECTION, function (err, result) {
+        /*polls.find({}, POLL_PROJECTION, function (err, result) {
             if (err) {
                 throw err;
             }
@@ -15,13 +15,7 @@ function authorDashboardController (db) {
             res.setHeader('Content-Type', 'application/json');
 
             if(result === null){
-                polls.insert({'clicks': 0}, function (err) {
-                    if (err) {
-                        throw err;
-                    }
-                });
-
-                res.json({'clicks': 0});
+                res.json('No existing polls');
             }
             else{
                 res.json(result);
@@ -30,7 +24,9 @@ function authorDashboardController (db) {
     };
 
     this.addPoll = function (req, res) {
-        console.log("addPoll");
+        var pollName = req.body.pollname;
+        var pollOptions = req.body.polloptions;
+        
         /*polls.findAndModify(
             {},
             { '_id': 1 },
@@ -62,4 +58,4 @@ function authorDashboardController (db) {
     };
 }
 
-module.exports = authorDashboardController;
+module.exports = databaseController;
