@@ -21,7 +21,7 @@
 
       var params = {pollname: pollName, polloptions: options};
 
-      xmlhttp.open("POST", url, true);
+      xmlhttp.open(method, url, true);
       xmlhttp.setRequestHeader("Content-type", "application/json");
       
       xmlhttp.onreadystatechange = function () {
