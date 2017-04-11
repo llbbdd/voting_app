@@ -6,6 +6,13 @@ function databaseController (db) {
 
     this.getPolls = function (req, res) {
         console.log("getPolls");
+        read({}, 
+            {_id: 0}, 
+            function(documents){
+                // todo - redirection
+                console.log(documents);
+                res.send(documents);
+            });
     };
 
     this.addPoll = function (req, res) {
@@ -47,9 +54,13 @@ function databaseController (db) {
     }
     
     function read(query, projection, callback){
-        var cursor = pollsCollection.find(query, projection);
-        
-        callback(cursor.toArray());
+        pollsCollection.find(query, projection).toArray(function(err, results) {
+            if (err) {
+                throw err;
+            }
+            
+            callback(results);
+        });
     }
     
     function update(query, update, callback){
