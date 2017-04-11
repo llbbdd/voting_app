@@ -1,5 +1,4 @@
 'use strict';
-var qs = require('querystring');
 const POLL_PROJECTION = { '_id': false };
 
 function databaseController (db) {
@@ -7,20 +6,6 @@ function databaseController (db) {
 
     this.getPolls = function (req, res) {
         console.log("getPolls");
-        /*polls.find({}, POLL_PROJECTION, function (err, result) {
-            if (err) {
-                throw err;
-            }
-
-            res.setHeader('Content-Type', 'application/json');
-
-            if(result === null){
-                res.json('No existing polls');
-            }
-            else{
-                res.json(result);
-            }
-        });*/
     };
 
     this.addPoll = function (req, res) {
@@ -37,17 +22,6 @@ function databaseController (db) {
 
     this.deletePoll = function (req, res) {
         console.log("deletePoll");
-        /*polls.update(
-            {},
-            { 'clicks': 0 },
-            function (err, result) {
-                if (err) {
-                    throw err;
-                }
-
-                res.json(result);
-            }
-        );*/
     };
     
     function showCollection(){
