@@ -1,4 +1,5 @@
 'use strict';
+/* global httpRequest*/
 
 (function() {
    var addButton = document.getElementById('add-button');
@@ -18,21 +19,6 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   function ajaxRequest(method, url, postParams, callback) {
-      var xmlhttp = new XMLHttpRequest();
-
-      xmlhttp.open(method, url, true);
-      xmlhttp.setRequestHeader("Content-type", "application/json");
-      
-      xmlhttp.onreadystatechange = function () {
-         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            callback(xmlhttp.response);
-         }
-      };
-      
-      xmlhttp.send(JSON.stringify(postParams));
-   }
-   
    function populateDropdown(data) {
       var pollsObject = JSON.parse(data);
       var docfrag = document.createDocumentFragment();
@@ -49,7 +35,7 @@
    }
    
    function getExistingPolls(){
-      ajaxRequest('GET', pollsApiUrl + "getpolls", null, populateDropdown);
+      httpRequest('GET', pollsApiUrl + "getpolls", null, populateDropdown);
    }
    
    ready(getExistingPolls());
@@ -62,7 +48,7 @@
    deleteButton.addEventListener('click', function () {
       var selectedPoll = document.getElementById("existing-poll-list");
       
-      ajaxRequest('POST', pollsApiUrl + "deletepoll", {selectedpoll: selectedPoll.value}, function () {
+      httpRequest('POST', pollsApiUrl + "deletepoll", {selectedpoll: selectedPoll.value}, function () {
          getExistingPolls();
       });
       

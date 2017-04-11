@@ -1,4 +1,5 @@
 'use strict';
+/* global httpRequest*/
 
 (function() {
    var addButton = document.querySelector('.btn-add');
@@ -16,21 +17,6 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   function ajaxRequest(method, url, postParams, callback) {
-      var xmlhttp = new XMLHttpRequest();
-
-      xmlhttp.open(method, url, true);
-      xmlhttp.setRequestHeader("Content-type", "application/json");
-      
-      xmlhttp.onreadystatechange = function () {
-         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-            callback(xmlhttp.response);
-         }
-      };
-      
-      xmlhttp.send(JSON.stringify(postParams));
-   }
-   
    addButton.addEventListener('click', function () {
       var newPollName = document.getElementById('pollName').value;
       var options = [];
@@ -41,7 +27,7 @@
          i++;
       }while(document.getElementById('option' + i) !== null);
       
-      ajaxRequest('POST', pollsApiUrl + "addpoll", {pollname: newPollName, polloptions: options}, function () {
+      httpRequest('POST', pollsApiUrl + "addpoll", {pollname: newPollName, polloptions: options}, function () {
          window.location.href = "/";
       });
 
