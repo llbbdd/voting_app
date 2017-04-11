@@ -16,10 +16,8 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   function ajaxRequest(method, url, pollName, options, callback) {
+   function ajaxRequest(method, url, postParams, callback) {
       var xmlhttp = new XMLHttpRequest();
-
-      var params = {pollname: pollName, polloptions: options};
 
       xmlhttp.open(method, url, true);
       xmlhttp.setRequestHeader("Content-type", "application/json");
@@ -30,7 +28,7 @@
          }
       };
       
-      xmlhttp.send(JSON.stringify(params));
+      xmlhttp.send(JSON.stringify(postParams));
    }
    
    /*function populateDropdown(data) {
@@ -54,7 +52,7 @@
          i++;
       }while(document.getElementById('option' + i) !== null);
       
-      ajaxRequest('POST', pollsApiUrl, newPollName, options, function () {
+      ajaxRequest('POST', pollsApiUrl, {pollname: newPollName, polloptions: options}, function () {
          window.location.href = "/";
       });
 
