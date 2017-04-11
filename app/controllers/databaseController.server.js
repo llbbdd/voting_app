@@ -5,12 +5,10 @@ function databaseController (db) {
     var pollsCollection = db.collection('polls');
 
     this.getPolls = function (req, res) {
-        console.log("getPolls");
         read({}, 
             {_id: 0}, 
             function(documents){
                 // todo - redirection
-                console.log(documents);
                 res.send(documents);
             });
     };

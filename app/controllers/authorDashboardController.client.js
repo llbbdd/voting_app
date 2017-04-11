@@ -3,7 +3,7 @@
 (function() {
    var addButton = document.getElementById('add-button');
    var deleteButton = document.getElementById('delete-button');
-   var dropDown = document.getElementById("existing-poll-list");
+   var select = document.getElementById("existing-poll-list");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
    function ready(fn) {
@@ -33,12 +33,17 @@
    
    function populateDropdown(data) {
       var pollsObject = JSON.parse(data);
+      var docfrag = document.createDocumentFragment();
       
-      pollsObject.forEach(function(poll) {
-         console.log(poll);
-      });
+      for(var i=0; i<pollsObject.length; i++){
+         var optionElement = document.createElement("option");
+         
+         optionElement.value = i;
+         optionElement.text = pollsObject[i].pollname;
+         docfrag.appendChild(optionElement);
+      }
       
-      //clickNbr.innerHTML = clicksObject.clicks;
+      select.appendChild(docfrag);
    }
    
    ready(ajaxRequest('GET', pollsApiUrl, populateDropdown));
