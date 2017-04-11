@@ -1,5 +1,4 @@
 'use strict';
-const POLL_PROJECTION = { '_id': false };
 
 function databaseController (db) {
     var pollsCollection = db.collection('polls');
@@ -25,8 +24,7 @@ function databaseController (db) {
     };
 
     this.deletePoll = function (req, res) {
-        console.log("deletePoll");
-        console.log(req.body.selectedpoll);
+        console.log("deletePoll " + req.body.selectedpoll);
     };
     
     function showCollection(){

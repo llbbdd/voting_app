@@ -49,7 +49,7 @@
    }
    
    function getExistingPolls(){
-      ajaxRequest('GET', pollsApiUrl, null, populateDropdown);
+      ajaxRequest('GET', pollsApiUrl + "getpolls", null, populateDropdown);
    }
    
    ready(getExistingPolls());
@@ -62,7 +62,7 @@
    deleteButton.addEventListener('click', function () {
       var selectedPoll = document.getElementById("existing-poll-list");
       
-      ajaxRequest('POST', pollsApiUrl + "delete", {selectedpoll: selectedPoll.value}, function () {
+      ajaxRequest('POST', pollsApiUrl + "deletepoll", {selectedpoll: selectedPoll.value}, function () {
          getExistingPolls();
       });
       

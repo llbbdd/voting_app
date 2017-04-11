@@ -15,10 +15,12 @@ module.exports = function (app, db) {
         res.sendFile(process.cwd() + '/public/poll-add.html');
     });
 
-    app.route('/api/polls')
+    app.route('/api/polls/getpolls')
         .get(dbController.getPolls)
+        
+    app.route('/api/polls/addpoll')
         .post(dbController.addPoll)
         
-    app.route('/api/polls/delete')
+    app.route('/api/polls/deletepoll')
         .post(dbController.deletePoll)
 };
