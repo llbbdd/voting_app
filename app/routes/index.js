@@ -18,5 +18,7 @@ module.exports = function (app, db) {
     app.route('/api/polls')
         .get(dbController.getPolls)
         .post(dbController.addPoll)
-        .delete(dbController.deletePoll);
+        
+    app.route('/api/polls/delete')
+        .post(dbController.deletePoll)
 };
