@@ -22,8 +22,7 @@ function databaseController (db) {
         create({ 'pollname': pollName,
               'polloptions': pollOptions },
               function(){
-                  // todo - redirection
-                  showCollection();
+                  res.send(true);
               });
     };
 
