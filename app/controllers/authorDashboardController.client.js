@@ -1,8 +1,9 @@
 'use strict';
 
 (function() {
-   var addButton = document.querySelector('.btn-add');
-   var deleteButton = document.querySelector('.btn-delete');
+   var addButton = document.getElementById('add-button');
+   var deleteButton = document.getElementById('delete-button');
+   var dropDown = document.getElementById("existing-poll-list");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
    function ready(fn) {
@@ -36,6 +37,7 @@
       pollsObject.forEach(function(poll) {
          console.log(poll);
       });
+      
       //clickNbr.innerHTML = clicksObject.clicks;
    }
    
