@@ -48,7 +48,11 @@
       select.appendChild(docfrag);
    }
    
-   ready(ajaxRequest('GET', pollsApiUrl, null, populateDropdown));
+   function getExistingPolls(){
+      ajaxRequest('GET', pollsApiUrl, null, populateDropdown);
+   }
+   
+   ready(getExistingPolls());
    
    addButton.addEventListener('click', function () {
       window.location.href = "poll-add.html";
@@ -59,7 +63,7 @@
       var selectedPoll = document.getElementById("existing-poll-list");
       
       ajaxRequest('POST', pollsApiUrl + "delete", {selectedpoll: selectedPoll.value}, function () {
-         ajaxRequest('GET', pollsApiUrl, null, populateDropdown);
+         getExistingPolls();
       });
       
    }, false);
