@@ -10,9 +10,9 @@ module.exports = function (app, db) {
         res.sendFile(process.cwd() + '/public/author-dashboard.html');
     });
     
-    app.route('/poll-add.html')
+    app.route('/poll-edit.html')
         .get(function (req, res) {
-        res.sendFile(process.cwd() + '/public/poll-add.html');
+        res.sendFile(process.cwd() + '/public/poll-edit.html');
     });
 
     app.route('/api/polls/getpolls')
