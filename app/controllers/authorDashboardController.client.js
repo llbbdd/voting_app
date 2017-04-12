@@ -4,7 +4,7 @@
 (function() {
    var addButton = document.getElementById('add-button');
    var deleteButton = document.getElementById('delete-button');
-   var select = document.getElementById("existing-poll-list");
+   var pollDiv = document.getElementById("pollList");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
    function ready(fn) {
@@ -19,23 +19,26 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   function populateDropdown(data) {
+   function populatePollList(data) {
       var pollsObject = JSON.parse(data);
       var docfrag = document.createDocumentFragment();
       
       for(var i=0; i<pollsObject.length; i++){
-         var optionElement = document.createElement("option");
+         var optionRadioInput = document.createElement("input");
+         optionRadioInput.type = "radio";
+         optionRadioInput.value = pollsObject[i].pollname;
+         optionRadioInput.name = "polls";
          
-         optionElement.value = i;
-         optionElement.text = pollsObject[i].pollname;
-         docfrag.appendChild(optionElement);
+         docfrag.appendChild(optionRadioInput);
+         docfrag.appendChild(document.createTextNode(pollsObject[i].pollname));
+         docfrag.appendChild(document.createElement("br"));
       }
       
-      select.appendChild(docfrag);
+      pollDiv.appendChild(docfrag);
    }
    
    function getExistingPolls(){
-      httpRequest('GET', pollsApiUrl + "getpolls", null, populateDropdown);
+      httpRequest('GET', pollsApiUrl + "getpolls", null, populatePollList);
    }
    
    ready(getExistingPolls());
