@@ -13,14 +13,12 @@ function databaseController (db) {
     };
 
     this.addPoll = function (req, res) {
-        var pollName = req.body.pollname;
-        var pollOptions = req.body.polloptions;
+        var pollName = req.body.selectedpoll;
     
-        create({ 'pollname': pollName,
-              'polloptions': pollOptions },
-              function(){
-                  res.send(true);
-              });
+        create({ 'pollname': pollName},
+            function(){
+              res.send(true);
+            });
     };
 
     this.deletePoll = function (req, res) {
