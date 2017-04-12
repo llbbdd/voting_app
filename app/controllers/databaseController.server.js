@@ -5,7 +5,7 @@ function databaseController (db) {
 
     this.getPolls = function (req, res) {
         read({}, 
-            {_id: 0}, 
+            {_id: 1, pollname: 1, polloptions: 1}, 
             function(documents){
                 // todo - redirection
                 res.send(documents);
