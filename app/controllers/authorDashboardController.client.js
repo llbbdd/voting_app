@@ -27,7 +27,7 @@
       for(var i=0; i<pollsObject.length; i++){
          var optionRadioInput = document.createElement("input");
          optionRadioInput.type = "radio";
-         optionRadioInput.value = pollsObject[i].pollname;
+         optionRadioInput.value = pollsObject[i]._id;
          optionRadioInput.name = "polls";
          
          docfrag.appendChild(optionRadioInput);
