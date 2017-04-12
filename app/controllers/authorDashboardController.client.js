@@ -4,6 +4,7 @@
 (function() {
    var addButton = document.getElementById('add-button');
    var deleteButton = document.getElementById('delete-button');
+   var editButton = document.getElementById('edit-button');
    var pollDiv = document.getElementById("pollList");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
@@ -44,12 +45,19 @@
    ready(getExistingPolls());
    
    addButton.addEventListener('click', function () {
-      window.location.href = "poll-add.html";
-
+      var newPollName = document.getElementById("newpoll");
+      
+      httpRequest('POST', pollsApiUrl + "addpoll", {selectedpoll: newPollName.value}, function () {
+         getExistingPolls();
+      });
+   }, false);
+   
+   editButton.addEventListener('click', function () {
+      window.location.href = "poll-edit.html";
    }, false);
    
    deleteButton.addEventListener('click', function () {
-      var selectedPoll = document.getElementById("existing-poll-list");
+      var selectedPoll = document.querySelector('input[name = "polls"]:checked');
       
       httpRequest('POST', pollsApiUrl + "deletepoll", {selectedpoll: selectedPoll.value}, function () {
          getExistingPolls();
