@@ -1,4 +1,5 @@
 'use strict';
+var mongodb = require('mongodb'); // Only required for static reference to ObjectID constructor
 
 function databaseController (db) {
     var pollsCollection = db.collection('polls');
@@ -22,13 +23,15 @@ function databaseController (db) {
     };
 
     this.deletePoll = function (req, res) {
-        console.log("deletePoll " + req.body.selectedpoll);
+        del({_id: new mongodb.ObjectID(req.body.selectedpoll)}, function(){
+            res.send(true);
+        });
     };
     
     function showCollection(){
         read({}, null, function(documents){
             console.log(documents);
-        })
+        });
     }
     
     /*
@@ -71,9 +74,16 @@ function databaseController (db) {
         );
     }
     
-    function del(filter){
+    function del(filter, callback){
         pollsCollection.deleteOne(
-            filter
+            filter,
+            function(err, results){
+                if (err) {
+                    throw err;
+                }
+
+                callback();
+            }
         );
     }
 }
