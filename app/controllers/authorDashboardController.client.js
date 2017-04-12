@@ -57,7 +57,9 @@
    }, false);
    
    editButton.addEventListener('click', function () {
-      window.location.href = "poll-edit.html";
+      var selectedPoll = document.querySelector('input[name = "polls"]:checked');
+      
+      window.location.href = "poll-edit.html?poll=" + selectedPoll.value;
    }, false);
    
    deleteButton.addEventListener('click', function () {
