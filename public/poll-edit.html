@@ -15,18 +15,14 @@
         </div>
         
         <div class="container">
-            <p>Add new poll</p>
-            <br/>
-            Poll name: <input type="text" id="pollName"><br/>
-            Option 1: <input type="text" id="option0"><br/>
-            Option 2: <input type="text" id="option1"><br/>
-            <br/>
+            Poll name: <span id="pollName"></span>
+            <div id="pollOptions"></div>
             <div class="btn-container">
                 <button class="btn btn-create-poll">Create</button>
             </div>
         </div>
         
         <script type="text/javascript" src="/controllers/httpRequest.client.js"></script>
-        <script type="text/javascript" src="/controllers/pollAddController.client.js"></script>
+        <script type="text/javascript" src="/controllers/pollEditController.client.js"></script>
     </body>
 </html>
