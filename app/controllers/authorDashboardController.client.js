@@ -24,12 +24,16 @@
       var pollsObject = JSON.parse(data);
       var docfrag = document.createDocumentFragment();
       
+      while(pollDiv.firstChild){
+         pollDiv.removeChild(pollDiv.firstChild);
+      }
+      
       for(var i=0; i<pollsObject.length; i++){
          var optionRadioInput = document.createElement("input");
          optionRadioInput.type = "radio";
          optionRadioInput.value = pollsObject[i]._id;
          optionRadioInput.name = "polls";
-         
+
          docfrag.appendChild(optionRadioInput);
          docfrag.appendChild(document.createTextNode(pollsObject[i].pollname));
          docfrag.appendChild(document.createElement("br"));
