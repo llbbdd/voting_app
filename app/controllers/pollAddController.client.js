@@ -2,7 +2,7 @@
 /* global httpRequest*/
 
 (function() {
-   var addButton = document.querySelector('.btn-add');
+   var createPollButton = document.querySelector('.btn-create-poll');
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
    function ready(fn) {
@@ -17,7 +17,7 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   addButton.addEventListener('click', function () {
+   createPollButton.addEventListener('click', function () {
       var newPollName = document.getElementById('pollName').value;
       var options = [];
       var i=0;
