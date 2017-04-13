@@ -32,11 +32,11 @@ module.exports = function (app, db) {
     });
 
     app.route('/api/polls/getpolls')
-        .get(dbController.getPolls);
+        .get(dbController.getPolls)
         
     app.route('/api/polls/addpoll')
-        .post(dbController.addPoll);
+        .post(dbController.addPoll)
         
     app.route('/api/polls/deletepoll')
-        .post(dbController.deletePoll);
+        .post(dbController.deletePoll)
 };
