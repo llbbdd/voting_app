@@ -32,7 +32,7 @@ module.exports = function (app, db) {
     
     app.route('/poll-edit.html')
     .get(
-        require('connect-ensure-login').ensureLoggedIn('/sign-in.html'),
+        ensureLoggedIn('/sign-in.html'),
         function(req, res){
             res.sendFile(process.cwd() + '/public/poll-edit.html');
         }
