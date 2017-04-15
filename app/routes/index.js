@@ -1,6 +1,8 @@
 'use strict';
 
 var databaseController = require(process.cwd() + '/app/controllers/databaseController.server.js');
+var passport = require("passport");
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 module.exports = function (app, db) {
     var dbController = new databaseController(db);
@@ -14,8 +16,10 @@ module.exports = function (app, db) {
         .get(function (req, res) {
         res.sendFile(process.cwd() + '/public/sign-in.html');
     }).post(function (req, res) {
-        // todo authenticate
-        console.log("authenticate");
+        passport.authenticate('local', { failureRedirect: '/sign-in.html' }),
+        function(req, res) {
+            res.redirect('/');
+        };
     });
     
     app.route('/sign-up.html')
@@ -27,9 +31,12 @@ module.exports = function (app, db) {
     });
     
     app.route('/poll-edit.html')
-        .get(function (req, res) {
-        res.sendFile(process.cwd() + '/public/poll-edit.html');
-    });
+    .get(
+        require('connect-ensure-login').ensureLoggedIn('/sign-in.html'),
+        function(req, res){
+            res.sendFile(process.cwd() + '/public/poll-edit.html');
+        }
+    );
 
     app.route('/api/polls/getpolls')
         .get(dbController.getPolls);
@@ -39,4 +46,6 @@ module.exports = function (app, db) {
         
     app.route('/api/polls/deletepoll')
         .post(dbController.deletePoll);
-};
+}
+
+
