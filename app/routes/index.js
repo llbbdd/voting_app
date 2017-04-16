@@ -5,22 +5,23 @@ var passport = require("passport");
 var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 module.exports = function (app, db) {
-    var dbController = new databaseController(db);
-
     app.route('/')
-        .get(function (req, res) {
+        .get(function(req, res) {
         res.sendFile(process.cwd() + '/public/author-dashboard.html');
     });
     
-    app.route('/sign-in.html')
-        .get(function (req, res) {
-        res.sendFile(process.cwd() + '/public/sign-in.html');
-    }).post(function (req, res) {
-        passport.authenticate('local', { failureRedirect: '/sign-in.html' }),
+    app.route('/sign-in')
+    .get(
         function(req, res) {
+            res.sendFile(process.cwd() + '/public/sign-in.html');
+        }
+    ).post(
+        passport.authenticate('local', {failureRedirect: '/sign-in'}),
+        function(req, res) {
+            console.log("success");
             res.redirect('/');
-        };
-    });
+        }
+    );
     
     app.route('/sign-up.html')
         .get(function (req, res) {
@@ -32,11 +33,16 @@ module.exports = function (app, db) {
     
     app.route('/poll-edit.html')
     .get(
-        ensureLoggedIn('/sign-in.html'),
+        ensureLoggedIn('/sign-in'),
         function(req, res){
             res.sendFile(process.cwd() + '/public/poll-edit.html');
         }
     );
+    
+    /* 
+    API routes
+    */
+    var dbController = new databaseController(db);
 
     app.route('/api/polls/getpolls')
         .get(dbController.getPolls);
