@@ -30,6 +30,14 @@ module.exports = function (app, db) {
         console.log("add user");
     });
     
+    app.route('/log-out')
+    .get(
+        function(req, res){
+            req.logout();
+            res.redirect('/');
+        }
+    );
+    
     app.route('/poll-edit.html')
     .get(
         ensureLoggedIn('/sign-in'),
