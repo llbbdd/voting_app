@@ -8,12 +8,12 @@ var routes = require('./app/routes/index.js');
 
 const SERVER_PORT = 8080;
 const MONGO_PORT = 27017;
-const MONGO_DB_NAME = 'voting';
+const MONGO_DB_NAME = 'mongodb://localhost:' + MONGO_PORT + '/voting';
 
 var app = express();
 
 passport.use(new LocalStrategy(function(username, password, callback) {
-  mongo.connect('mongodb://localhost:' + MONGO_PORT + '/' + MONGO_DB_NAME, function(err, db) {
+  mongo.connect(MONGO_DB_NAME, function(err, db) {
     if(err){
       throw err;
     }
@@ -46,7 +46,7 @@ passport.serializeUser(function(user, callback) {
 });
 
 passport.deserializeUser(function(id, callback) {
-  mongo.connect('mongodb://localhost:' + MONGO_PORT + '/' + MONGO_DB_NAME, function(err, db) {
+  mongo.connect(MONGO_DB_NAME, function(err, db) {
     if(err){
       throw err;
     }
@@ -63,7 +63,7 @@ passport.deserializeUser(function(id, callback) {
   });
 });
 
-mongo.connect('mongodb://localhost:' + MONGO_PORT + '/' + MONGO_DB_NAME, function (err, db) {
+mongo.connect(MONGO_DB_NAME, function (err, db) {
     if (err) {
         throw new Error('Database failed to connect!');
     } else {
