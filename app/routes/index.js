@@ -18,7 +18,6 @@ module.exports = function (app, db) {
     ).post(
         passport.authenticate('local', {failureRedirect: '/sign-in'}),
         function(req, res) {
-            console.log("success");
             res.redirect('/');
         }
     );
