@@ -22,7 +22,7 @@ module.exports = function (app, db) {
         }
     );
     
-    app.route('/sign-up.html')
+    app.route('/sign-up')
         .get(function (req, res) {
         res.sendFile(process.cwd() + '/public/sign-up.html');
     }).post(function (req, res) {
