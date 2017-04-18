@@ -29,7 +29,7 @@
         var link = document.createElement("a");
         var linkText = document.createTextNode(pollsObject[i].pollname);
         link.appendChild(linkText);
-        link.href = 'poll-choice?' + pollsObject[i]._id;
+        link.href = 'poll-choice?pollId=' + pollsObject[i]._id;
         link.name = "polls";
 
         docfrag.appendChild(link);
