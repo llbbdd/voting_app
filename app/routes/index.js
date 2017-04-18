@@ -146,4 +146,7 @@ module.exports = function(app, db) {
 
     app.route('/api/polls/deletepoll')
         .post(dbController.deletePoll);
+        
+    app.route('/api/polls/getpoll')
+        .get(dbController.getPoll);
 }
