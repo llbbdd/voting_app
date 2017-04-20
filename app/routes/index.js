@@ -47,7 +47,7 @@ module.exports = function(app, db) {
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/poll-choice.html');
+            res.render('poll-choice', {user: getUser(req)});
         }).post(function(req, res) {
             // todo send chosen option
             console.log("option chosen");
@@ -55,7 +55,7 @@ module.exports = function(app, db) {
         
     app.route('/poll-results')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/poll-results.html');
+            res.render('poll-results', {user: getUser(req)});
         }).post(function(req, res) {
             // todo view poll results
             console.log("poll results");
