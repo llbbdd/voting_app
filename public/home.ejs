@@ -12,7 +12,11 @@
             <img src="/public/img/vote.png" width="62" height="72"/>
             <br/>
             <p class="heading-text">FreeCodeCamp Voting App</p>
-            <a href="/log-out">Log out</a>
+            <% if(user){%>
+                <a href="/log-out">Sign out</a>
+            <% }else{%>
+                <a href="/sign-in">Sign in</a>
+            <% }%>
         </div>
         
         <div class="container">

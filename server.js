@@ -58,6 +58,10 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
       });
     });
 
+    // Configure view engine to render EJS templates.
+    app.set('views', __dirname + '/public');
+    app.set('view engine', 'ejs');
+
     app.use(require('cookie-parser')());
     app.use(require('body-parser').urlencoded({ extended: true }));
     app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
