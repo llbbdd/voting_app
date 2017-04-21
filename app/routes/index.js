@@ -9,7 +9,7 @@ module.exports = function(app, db) {
     */
     app.route('/')
         .get(function(req, res) {
-            res.render('home');
+            res.render('home', {username: getUser(req)});
         });
 
     app.route('/home')
@@ -19,19 +19,19 @@ module.exports = function(app, db) {
 
     app.route('/sign-in')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/sign-in.html');
+            res.render('sign-in');
         }).post(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.redirect('/author-dashboard.html');
+                res.render('author-dashboard');
             }
         );
 
     app.route('/sign-up')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/sign-up.html');
+            res.render('sign-up');
         }).post(function(req, res) {
             // todo add user
             console.log("add user");
@@ -41,7 +41,7 @@ module.exports = function(app, db) {
         .get(
             function(req, res) {
                 req.logout();
-                res.redirect('/');
+                res.render('home');
             }
         );
 
@@ -67,68 +67,68 @@ module.exports = function(app, db) {
     app.route('/author-dashboard')
         .get(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.sendFile(process.cwd() + '/public/author-dashboard.html');
+                res.render('author-dashboard');
             }
         ).post(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.redirect('/author-dashboard.html');
+                res.render('author-dashboard');
             }
         );
         
     app.route('/poll-edit')
         .get(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.sendFile(process.cwd() + '/public/poll-edit.html');
+                res.render('poll-edit');
             }
         ).post(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.redirect('/poll-edit.html');
+                res.redirect('poll-edit');
             }
         );
 
     app.route('/poll-add')
         .get(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.sendFile(process.cwd() + '/public/poll-add.html');
+                res.render('poll-add');
             }
         ).post(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.redirect('/poll-add.html');
+                res.render('poll-add');
             }
         );
         
     app.route('/poll-url')
         .get(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.sendFile(process.cwd() + '/public/poll-url.html');
+                res.render('poll-url');
             }
         ).post(
             passport.authenticate('local', {
-                failureRedirect: '/sign-in'
+                failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.redirect('/poll-url.html');
+                res.render('poll-url');
             }
         );
         
@@ -146,6 +146,9 @@ module.exports = function(app, db) {
     app.route('/api/polls/deletepoll')
         .post(dbController.deletePoll);
         
+    /*
+        Helper functions
+    */
     function getUser(req){
         return (req.user === undefined) ? undefined : req.user.name;
     }
