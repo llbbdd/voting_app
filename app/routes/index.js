@@ -14,7 +14,7 @@ module.exports = function(app, db) {
 
     app.route('/home')
         .get(function(req, res) {
-            res.render('home', {user: getUser(req)});
+            res.render('home', {username: getUser(req)});
         });
 
     app.route('/sign-in')
@@ -47,7 +47,7 @@ module.exports = function(app, db) {
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            res.render('poll-choice', {user: getUser(req)});
+            res.render('poll-choice', {username: getUser(req)});
         }).post(function(req, res) {
             // todo send chosen option
             console.log("option chosen");
@@ -55,7 +55,7 @@ module.exports = function(app, db) {
         
     app.route('/poll-results')
         .get(function(req, res) {
-            res.render('poll-results', {user: getUser(req)});
+            res.render('poll-results', {username: getUser(req)});
         }).post(function(req, res) {
             // todo view poll results
             console.log("poll results");
