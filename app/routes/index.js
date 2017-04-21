@@ -41,7 +41,7 @@ module.exports = function(app, db) {
         .get(
             function(req, res) {
                 req.logout();
-                res.render('home');
+                res.render('home', {username: getUser(req)});
             }
         );
 
@@ -150,6 +150,6 @@ module.exports = function(app, db) {
         Helper functions
     */
     function getUser(req){
-        return (req.user === undefined) ? undefined : req.user.name;
+        return (req.user === undefined || req.user === null) ? null : req.user.name;
     }
 };
