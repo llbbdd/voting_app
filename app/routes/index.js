@@ -2,7 +2,6 @@
 
 var databaseController = require(process.cwd() + '/app/controllers/databaseController.server.js');
 var passport = require("passport");
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 module.exports = function(app, db) {
     /*
@@ -10,12 +9,12 @@ module.exports = function(app, db) {
     */
     app.route('/')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/home.html');
+            res.render('home');
         });
 
     app.route('/home')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/home.html');
+            res.render('home', {user: getUser(req)});
         });
 
     app.route('/sign-in')
@@ -48,7 +47,7 @@ module.exports = function(app, db) {
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/poll-choice.html');
+            res.render('poll-choice', {user: getUser(req)});
         }).post(function(req, res) {
             // todo send chosen option
             console.log("option chosen");
@@ -56,7 +55,7 @@ module.exports = function(app, db) {
         
     app.route('/poll-results')
         .get(function(req, res) {
-            res.sendFile(process.cwd() + '/public/poll-results.html');
+            res.render('poll-results', {user: getUser(req)});
         }).post(function(req, res) {
             // todo view poll results
             console.log("poll results");
@@ -147,6 +146,7 @@ module.exports = function(app, db) {
     app.route('/api/polls/deletepoll')
         .post(dbController.deletePoll);
         
-    app.route('/api/polls/getpoll')
-        .get(dbController.getPoll);
-}
+    function getUser(req){
+        return (req.user === undefined) ? undefined : req.user.name;
+    }
+};
