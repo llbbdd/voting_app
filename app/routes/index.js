@@ -9,12 +9,12 @@ module.exports = function(app, db) {
     */
     app.route('/')
         .get(function(req, res) {
-            res.render('home', {username: getUser(req)});
+            res.render('home', {username: getUserName(req)});
         });
 
     app.route('/home')
         .get(function(req, res) {
-            res.render('home', {username: getUser(req)});
+            res.render('home', {username: getUserName(req)});
         });
 
     app.route('/sign-in')
@@ -41,13 +41,13 @@ module.exports = function(app, db) {
         .get(
             function(req, res) {
                 req.logout();
-                res.render('home', {username: getUser(req)});
+                res.render('home', {username: getUserName(req)});
             }
         );
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            res.render('poll-choice', {username: getUser(req)});
+            res.render('poll-choice', {username: getUserName(req)});
         }).post(function(req, res) {
             // todo send chosen option
             console.log("option chosen");
@@ -55,7 +55,7 @@ module.exports = function(app, db) {
         
     app.route('/poll-results')
         .get(function(req, res) {
-            res.render('poll-results', {username: getUser(req)});
+            res.render('poll-results', {username: getUserName(req)});
         }).post(function(req, res) {
             // todo view poll results
             console.log("poll results");
@@ -149,7 +149,7 @@ module.exports = function(app, db) {
     /*
         Helper functions
     */
-    function getUser(req){
+    function getUserName(req){
         return (req.user === undefined || req.user === null) ? null : req.user.name;
     }
 };
