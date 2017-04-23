@@ -30,6 +30,17 @@ function databaseController (db) {
               res.send(true);
             });
     };
+    
+    this.incrementPollOption = function (pollId, pollOption, callback) {
+        var operation = {};
+        operation[pollOption] = 1;
+
+        update(
+            {_id: new ObjectID(pollId)},
+            { $inc: operation },
+            callback
+        );
+    };
 
     this.deletePoll = function (req, res) {
         del({_id: new mongodb.ObjectID(req.body.selectedpoll)}, function(){

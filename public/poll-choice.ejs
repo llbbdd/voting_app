@@ -10,14 +10,15 @@
         <div class="container">
             <%= poll[0].pollname %>
             </br>
-            <% for(var i=0; i<poll[0].polloptions.length; i++){ %>
-                <%= poll[0].polloptions[i];%>
-                </br>
-            <% } %>
+            <form id="pollList" action="/poll-choice" method="post">
+                <input type="hidden" name="pollId" value="<%= poll[0]._id %>">
+                <% for(var i=0; i<poll[0].polloptions.length; i++){ %>
+                    <input type="radio" name="polloption" value="<%="option" + i %>"><%= poll[0].polloptions[i];%></br>
+                <% } %>
+                <input type="submit" value="Submit">
+            </form>
         </div>
         
         <% include ../public/partials/footer %>
-        
-        <script type="text/javascript" src="/controllers/clickController.client.js"></script>
     </body>
 </html>

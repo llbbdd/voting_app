@@ -53,8 +53,9 @@ module.exports = function(app, db) {
                 res.render('poll-choice', {username: getUserName(req), poll: pollData});
             });
         }).post(function(req, res) {
-            // todo send chosen option
-            console.log("option chosen");
+            dbController.incrementPollOption(req.body.pollId, req.body.polloption, function(){
+                res.render('poll-results', {username: getUserName(req)});
+            });
         });
         
     app.route('/poll-results')
