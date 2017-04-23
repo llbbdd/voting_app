@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Clementine.js - The elegant and lightweight full-stack boilerplate.</title>
-        
-        <link href="http://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css">
-        <link href="/public/css/main.css" rel="stylesheet" type="text/css">
+        <% include ../public/partials/head %>
     </head>
     
     <body>
-        <div class="container">
-            <img src="/public/img/clementine_150.png" />
-            <br/>
-            <p class="clementine-text">Clementine.js</p>
-        </div>
+        <% include ../public/partials/header %>
         
         <div class="container">
             <p>You have clicked the button <span id="click-nbr"></span> times.</p>
@@ -22,6 +15,8 @@
                 <button class="btn btn-delete">RESET</button>
             </div>
         </div>
+        
+        <% include ../public/partials/footer %>
         
         <script type="text/javascript" src="/controllers/clickController.client.js"></script>
     </body>

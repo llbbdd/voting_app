@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>FreeCodeCamp Voting App</title>
-        
-        <link href="http://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css">
-        <link href="/public/css/main.css" rel="stylesheet" type="text/css">
+        <% include ../public/partials/head %>
     </head>
     
     <body>
-        <div class="container">
-            <img src="/public/img/vote.png" width="62" height="72"/>
-            <br/>
-            <p class="heading-text">FreeCodeCamp Voting App</p>
-        </div>
+        <% include ../public/partials/header %>
         
         <div class="container">
             Poll name: <span id="pollName"></span>
@@ -21,6 +14,8 @@
                 <button class="btn btn-create-poll">Create</button>
             </div>
         </div>
+        
+        <% include ../public/partials/footer %>
         
         <script type="text/javascript" src="/controllers/httpRequest.client.js"></script>
         <script type="text/javascript" src="/controllers/pollEditController.client.js"></script>
