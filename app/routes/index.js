@@ -61,9 +61,6 @@ module.exports = function(app, db) {
     app.route('/poll-results')
         .get(function(req, res) {
             res.render('poll-results', {username: getUserName(req)});
-        }).post(function(req, res) {
-            // todo view poll results
-            console.log("poll results");
         });
     
     /*
