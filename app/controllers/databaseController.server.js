@@ -14,14 +14,23 @@ function databaseController (db) {
             });
     };
     
-    this.getPoll = function (pollId, callback) {
+    this.getPollOptions = function (pollId, callback) {
+        read({_id: new ObjectID(pollId)},
+            {pollname: 1, polloptions: 1},
+            function(poll){
+                console.log(poll);
+                callback(poll);
+            });
+    };
+
+    this.getPollResults = function (pollId, callback) {
         read({_id: new ObjectID(pollId)},
             {},
             function(poll){
                 callback(poll);
             });
     };
-
+    
     this.addPoll = function (req, res) {
         var pollName = req.body.selectedpoll;
     
