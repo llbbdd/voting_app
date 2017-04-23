@@ -18,7 +18,6 @@ function databaseController (db) {
         read({_id: new ObjectID(pollId)},
             {pollname: 1, polloptions: 1},
             function(poll){
-                console.log(poll);
                 callback(poll);
             });
     };

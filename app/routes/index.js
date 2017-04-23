@@ -49,18 +49,15 @@ module.exports = function(app, db) {
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            dbController.getPoll(req.query.pollId, function(pollData){
+            dbController.getPollOptions(req.query.pollId, function(pollData){
                 res.render('poll-choice', {username: getUserName(req), poll: pollData});
             });
         }).post(function(req, res) {
             dbController.incrementPollOption(req.body.pollId, req.body.polloption, function(){
-                res.render('poll-results', {username: getUserName(req)});
+                dbController.getPollResults(req.body.pollId, function(pollData){
+                    res.render('poll-results', {username: getUserName(req), poll: pollData});
+                });
             });
-        });
-        
-    app.route('/poll-results')
-        .get(function(req, res) {
-            res.render('poll-results', {username: getUserName(req)});
         });
     
     /*
