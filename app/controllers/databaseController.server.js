@@ -1,5 +1,6 @@
 'use strict';
 var mongodb = require('mongodb'); // Only required for static reference to ObjectID constructor
+var ObjectID = require('mongodb').ObjectID;
 
 function databaseController (db) {
     var pollsCollection = db.collection('polls');
@@ -10,6 +11,14 @@ function databaseController (db) {
             function(documents){
                 // todo - redirection
                 res.send(documents);
+            });
+    };
+    
+    this.getPoll = function (pollId, callback) {
+        read({_id: new ObjectID(pollId)},
+            {},
+            function(poll){
+                callback(poll);
             });
     };
 
