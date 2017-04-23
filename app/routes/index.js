@@ -4,6 +4,8 @@ var databaseController = require(process.cwd() + '/app/controllers/databaseContr
 var passport = require("passport");
 
 module.exports = function(app, db) {
+    var dbController = new databaseController(db);
+    
     /*
         Unauthorised GET pages
     */
@@ -47,7 +49,9 @@ module.exports = function(app, db) {
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            res.render('poll-choice', {username: getUserName(req)});
+            dbController.getPoll(req.query.pollId, function(pollData){
+                res.render('poll-choice', {username: getUserName(req), poll: pollData});
+            });
         }).post(function(req, res) {
             // todo send chosen option
             console.log("option chosen");
@@ -135,8 +139,6 @@ module.exports = function(app, db) {
     /*
     API routes
     */
-    var dbController = new databaseController(db);
-
     app.route('/api/polls/getpolls')
         .get(dbController.getPolls);
 
