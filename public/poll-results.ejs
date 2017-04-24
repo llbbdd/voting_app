@@ -8,12 +8,10 @@
         <% include ../public/partials/header %>
         
         <div class="container">
-            <p>You have clicked the button <span id="click-nbr"></span> times.</p>
-            <br/>
-            <div class="btn-container">
-                <button type="submit" class="btn btn-add">CLICK ME!</button>
-                <button class="btn btn-delete">RESET</button>
-            </div>
+            <%= poll[0].pollname %></br>
+            <% for(var i=0; i<poll[0].polloptions.length; i++){ %>
+                <%= poll[0].polloptions[i]%> <%= poll[0]["option" + i] %></br>
+            <% } %>
         </div>
         
         <% include ../public/partials/footer %>
