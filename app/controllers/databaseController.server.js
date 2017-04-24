@@ -26,6 +26,7 @@ function databaseController (db) {
         read({_id: new ObjectID(pollId)},
             {},
             function(poll){
+                poll[0]["totalvotes"] = calculateTotalVotes(poll);
                 callback(poll);
             });
     };
@@ -113,6 +114,19 @@ function databaseController (db) {
                 callback();
             }
         );
+    }
+    
+    /*
+        Helper functions
+    */
+    function calculateTotalVotes(poll){
+        var total = 0;
+        
+        for(var i=0; i<poll[0].polloptions.length; i++){
+            total += poll[0]["option" + i];
+        }
+        
+        return total;
     }
 }
 

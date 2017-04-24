@@ -10,7 +10,7 @@
         <div class="container">
             <%= poll[0].pollname %></br>
             <% for(var i=0; i<poll[0].polloptions.length; i++){ %>
-                <%= poll[0].polloptions[i]%> <%= poll[0]["option" + i] %></br>
+                <%= poll[0].polloptions[i]%> <%= Math.floor((poll[0]["option" + i] / poll[0].totalvotes) * 100) %>%</br>
             <% } %>
         </div>
         
