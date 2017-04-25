@@ -7,11 +7,11 @@ var mongo = require('mongodb').MongoClient;
 var routes = require('./app/routes/index.js');
 var favicon = require('serve-favicon');
 var path = require('path');
+var userDbController = require(process.cwd() + '/app/controllers/userDbController.server.js');
 
 const SERVER_PORT = 8080;
 const MONGO_PORT = 27017;
 const MONGO_DB_NAME = 'mongodb://localhost:' + MONGO_PORT + '/voting';
-const USER_COLLECTION_NAME = 'users';
 
 var app = express();
 
@@ -22,14 +22,10 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
         console.log('MongoDB successfully connected on port ' + MONGO_PORT);
     }
     
-    var usersCollection = db.collection(USER_COLLECTION_NAME);
+    var dbController = new userDbController(db);
     
     passport.use(new LocalStrategy(function(username, password, callback) {
-      usersCollection.findOne({username: username}, function(err, user) {
-        if(err){
-          throw err;
-        }
-    
+      dbController.getUserByUsername(username, function(user){
         if(!user){
           // Username not found
           return callback(null, false);
@@ -49,13 +45,9 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
     passport.serializeUser(function(user, callback) {
       callback(null, user.id);
     });
-
+    
     passport.deserializeUser(function(id, callback) {
-      usersCollection.findOne({id: id}, function(err, user) {
-        if(err){ 
-          return callback(err); 
-        }
-        
+      dbController.getUserById(id, function(user){
         callback(null, user);
       });
     });
