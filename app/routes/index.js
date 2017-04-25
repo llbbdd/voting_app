@@ -27,7 +27,7 @@ module.exports = function(app, db) {
                 failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.render('author-dashboard');
+                res.render('author-dashboard', {username: getUserName(req)});
             }
         );
 
@@ -69,14 +69,14 @@ module.exports = function(app, db) {
                 failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.render('author-dashboard');
+                res.render('author-dashboard', {username: getUserName(req)});
             }
         ).post(
             passport.authenticate('local', {
                 failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.render('author-dashboard');
+                res.render('author-dashboard', {username: getUserName(req)});
             }
         );
         
