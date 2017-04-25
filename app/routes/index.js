@@ -1,10 +1,10 @@
 'use strict';
 
-var databaseController = require(process.cwd() + '/app/controllers/databaseController.server.js');
+var pollsDbController = require(process.cwd() + '/app/controllers/pollsDbController.server.js');
 var passport = require("passport");
 
 module.exports = function(app, db) {
-    var dbController = new databaseController(db);
+    var dbController = new pollsDbController(db);
     
     /*
         Unauthorised GET pages
@@ -36,7 +36,7 @@ module.exports = function(app, db) {
             res.render('sign-up', {username: null});
         }).post(function(req, res) {
             // todo add user
-            console.log("add user");
+            console.log("add user " + req.body.username + req.body.password);
         });
 
     app.route('/log-out')
