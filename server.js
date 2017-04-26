@@ -22,10 +22,10 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
         console.log('MongoDB successfully connected on port ' + MONGO_PORT);
     }
     
-    var dbController = new userDbController(db);
+    var userDb = new userDbController(db);
     
     passport.use(new LocalStrategy(function(username, password, callback) {
-      dbController.getUserByUsername(username, function(user){
+      userDb.getUserByUsername(username, function(user){
         if(!user){
           // Username not found
           return callback(null, false);
@@ -47,7 +47,7 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
     });
     
     passport.deserializeUser(function(id, callback) {
-      dbController.getUserById(id, function(user){
+      userDb.getUserById(id, function(user){
         callback(null, user);
       });
     });

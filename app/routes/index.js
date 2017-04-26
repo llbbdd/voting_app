@@ -1,10 +1,10 @@
 'use strict';
 
-var pollsDbController = require(process.cwd() + '/app/controllers/pollsDbController.server.js');
+var pollDbController = require(process.cwd() + '/app/controllers/pollDbController.server.js');
 var passport = require("passport");
 
 module.exports = function(app, db) {
-    var dbController = new pollsDbController(db);
+    var pollDb = new pollDbController(db);
     
     /*
         Unauthorised GET pages
@@ -35,8 +35,8 @@ module.exports = function(app, db) {
         .get(function(req, res) {
             res.render('sign-up', {username: null});
         }).post(function(req, res) {
-            // todo add user
             console.log("add user " + req.body.username + req.body.password);
+            
         });
 
     app.route('/log-out')
@@ -49,12 +49,12 @@ module.exports = function(app, db) {
 
     app.route('/poll-choice')
         .get(function(req, res) {
-            dbController.getPollOptions(req.query.pollId, function(pollData){
+            pollDb.getPollOptions(req.query.pollId, function(pollData){
                 res.render('poll-choice', {username: getUserName(req), poll: pollData});
             });
         }).post(function(req, res) {
-            dbController.incrementPollOption(req.body.pollId, req.body.polloption, function(){
-                dbController.getPollResults(req.body.pollId, function(pollData){
+            pollDb.incrementPollOption(req.body.pollId, req.body.polloption, function(){
+                pollDb.getPollResults(req.body.pollId, function(pollData){
                     res.render('poll-results', {username: getUserName(req), poll: pollData});
                 });
             });
@@ -135,13 +135,13 @@ module.exports = function(app, db) {
     API routes
     */
     app.route('/api/polls/getpolls')
-        .get(dbController.getPolls);
+        .get(pollDb.getPolls);
 
     app.route('/api/polls/addpoll')
-        .post(dbController.addPoll);
+        .post(pollDb.addPoll);
 
     app.route('/api/polls/deletepoll')
-        .post(dbController.deletePoll);
+        .post(pollDb.deletePoll);
         
     /*
         Helper functions
