@@ -46,7 +46,7 @@ module.exports = function(app, db) {
         .get(
             function(req, res) {
                 req.logout();
-                res.render('home', {displayname: getUserDisplayName(req)});
+                res.redirect('home');
             }
         );
 
