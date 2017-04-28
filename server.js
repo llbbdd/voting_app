@@ -43,11 +43,11 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
 
     // Configure Passport authenticated session persistence.
     passport.serializeUser(function(user, callback) {
-      callback(null, user.id);
+      callback(null, user._id);
     });
     
-    passport.deserializeUser(function(id, callback) {
-      userDb.getUserById(id, function(user){
+    passport.deserializeUser(function(userId, callback) {
+      userDb.getUserById(userId, function(user){
         callback(null, user);
       });
     });
