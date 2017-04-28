@@ -1,10 +1,12 @@
 'use strict';
 
 var pollDbController = require(process.cwd() + '/app/controllers/pollDbController.server.js');
+var userDbController = require(process.cwd() + '/app/controllers/userDbController.server.js');
 var passport = require("passport");
 
 module.exports = function(app, db) {
     var pollDb = new pollDbController(db);
+    var userDb = new userDbController(db);
     
     /*
         Unauthorised GET pages
@@ -27,7 +29,7 @@ module.exports = function(app, db) {
                 failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.render('author-dashboard', {username: getUserName(req)});
+                res.redirect('author-dashboard');
             }
         );
 
@@ -35,8 +37,9 @@ module.exports = function(app, db) {
         .get(function(req, res) {
             res.render('sign-up', {username: null});
         }).post(function(req, res) {
-            console.log("add user " + req.body.username + req.body.password);
-            
+            userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(){
+                res.redirect('home');
+            });
         });
 
     app.route('/log-out')
