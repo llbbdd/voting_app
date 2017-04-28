@@ -3,6 +3,7 @@
 var pollDbController = require(process.cwd() + '/app/controllers/pollDbController.server.js');
 var userDbController = require(process.cwd() + '/app/controllers/userDbController.server.js');
 var passport = require("passport");
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 module.exports = function(app, db) {
     var pollDb = new pollDbController(db);
@@ -68,16 +69,12 @@ module.exports = function(app, db) {
     */
     app.route('/author-dashboard')
         .get(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
-            function(req, res) {
+            ensureLoggedIn('sign-in'),
+            function(req, res){
                 res.render('author-dashboard', {displayname: getUserDisplayName(req)});
             }
         ).post(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('author-dashboard', {displayname: getUserDisplayName(req)});
             }
@@ -85,16 +82,12 @@ module.exports = function(app, db) {
         
     app.route('/poll-edit')
         .get(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('poll-edit');
             }
         ).post(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.redirect('poll-edit');
             }
@@ -102,16 +95,12 @@ module.exports = function(app, db) {
 
     app.route('/poll-add')
         .get(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('poll-add');
             }
         ).post(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('poll-add');
             }
@@ -119,16 +108,12 @@ module.exports = function(app, db) {
         
     app.route('/poll-url')
         .get(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('poll-url');
             }
         ).post(
-            passport.authenticate('local', {
-                failureRedirect: 'sign-in'
-            }),
+            ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('poll-url');
             }
