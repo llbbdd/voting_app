@@ -13,17 +13,17 @@ module.exports = function(app, db) {
     */
     app.route('/')
         .get(function(req, res) {
-            res.render('home', {username: getUserDisplayName(req)});
+            res.render('home', {displayname: getUserDisplayName(req)});
         });
 
     app.route('/home')
         .get(function(req, res) {
-            res.render('home', {username: getUserDisplayName(req)});
+            res.render('home', {displayname: getUserDisplayName(req)});
         });
 
     app.route('/sign-in')
         .get(function(req, res) {
-            res.render('sign-in', {username: null});
+            res.render('sign-in', {displayname: null});
         }).post(
             passport.authenticate('local', {
                 failureRedirect: 'sign-in'
@@ -35,7 +35,7 @@ module.exports = function(app, db) {
 
     app.route('/sign-up')
         .get(function(req, res) {
-            res.render('sign-up', {username: null});
+            res.render('sign-up', {displayname: null});
         }).post(function(req, res) {
             userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(){
                 res.redirect('home');
@@ -46,19 +46,19 @@ module.exports = function(app, db) {
         .get(
             function(req, res) {
                 req.logout();
-                res.render('home', {username: getUserDisplayName(req)});
+                res.render('home', {displayname: getUserDisplayName(req)});
             }
         );
 
     app.route('/poll-choice')
         .get(function(req, res) {
             pollDb.getPollOptions(req.query.pollId, function(pollData){
-                res.render('poll-choice', {username: getUserDisplayName(req), poll: pollData});
+                res.render('poll-choice', {displayname: getUserDisplayName(req), poll: pollData});
             });
         }).post(function(req, res) {
             pollDb.incrementPollOption(req.body.pollId, req.body.polloption, function(){
                 pollDb.getPollResults(req.body.pollId, function(pollData){
-                    res.render('poll-results', {username: getUserDisplayName(req), poll: pollData});
+                    res.render('poll-results', {displayname: getUserDisplayName(req), poll: pollData});
                 });
             });
         });
@@ -72,14 +72,14 @@ module.exports = function(app, db) {
                 failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.render('author-dashboard', {username: getUserDisplayName(req)});
+                res.render('author-dashboard', {displayname: getUserDisplayName(req)});
             }
         ).post(
             passport.authenticate('local', {
                 failureRedirect: 'sign-in'
             }),
             function(req, res) {
-                res.render('author-dashboard', {username: getUserDisplayName(req)});
+                res.render('author-dashboard', {displayname: getUserDisplayName(req)});
             }
         );
         
@@ -150,6 +150,6 @@ module.exports = function(app, db) {
         Helper functions
     */
     function getUserDisplayName(req){
-        return (req.user === undefined || req.user === null) ? null : req.user.displayName;
+        return (req.user === undefined || req.user === null) ? "" : req.user.displayName;
     }
 };
