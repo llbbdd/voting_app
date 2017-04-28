@@ -11,8 +11,14 @@ function databaseController (db) {
     };
     
     this.getUserById = function (userId, callback) {
-        readOne({id: userId}, function(user) {
+        readOne({_id: new ObjectID(userId)}, function(user) {
             callback(user);
+        });
+    };
+    
+    this.addUser = function (username, password, displayName, emails, callback) {
+        create({username: username, password: password, displayName: displayName, emails: emails}, function(document){
+            callback();
         });
     };
     
@@ -26,14 +32,12 @@ function databaseController (db) {
         Low-level database access
     */
     function create(document, callback){
-        userCollection.insert(
-            document,
-            function (err, result) {
+        userCollection.insert(document, function (err, result) {
                 if (err) {
                     throw err;
                 }
                 
-                callback();
+                callback(document);
             }
         );
     }
