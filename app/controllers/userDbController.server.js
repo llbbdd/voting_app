@@ -17,8 +17,8 @@ function databaseController (db) {
     };
     
     this.addUser = function (username, password, displayName, emails, callback) {
-        create({username: username, password: password, displayName: displayName, emails: emails}, function(document){
-            callback();
+        create({username: username, password: password, displayName: displayName, emails: emails}, function(newUser){
+            callback(newUser);
         });
     };
     
