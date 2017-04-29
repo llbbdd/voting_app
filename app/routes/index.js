@@ -38,8 +38,14 @@ module.exports = function(app, db) {
         .get(function(req, res) {
             res.render('sign-up', {displayname: null});
         }).post(function(req, res) {
-            userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(){
-                res.redirect('home');
+            userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(newUser){
+                req.login(newUser, function(err) {
+                    if(err){
+                        throw err; 
+                    }
+                    
+                    res.redirect('author-dashboard');
+                });
             });
         });
 
