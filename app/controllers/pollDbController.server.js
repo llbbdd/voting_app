@@ -9,7 +9,6 @@ function databaseController (db) {
         read({}, 
             {_id: 1, pollname: 1, polloptions: 1}, 
             function(documents){
-                // todo - redirection
                 res.send(documents);
             });
     };
