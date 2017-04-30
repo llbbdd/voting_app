@@ -103,7 +103,7 @@ module.exports = function(app, db) {
         .get(
             ensureLoggedIn('sign-in'),
             function(req, res) {
-                res.render('poll-add');
+                res.render('poll-add', {displayname: getUserDisplayName(req)});
             }
         ).post(
             ensureLoggedIn('sign-in'),
