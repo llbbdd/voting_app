@@ -5,11 +5,32 @@ var ObjectID = require('mongodb').ObjectID;
 function databaseController (db) {
     var pollsCollection = db.collection('polls');
 
+    /*
+        API call database functions
+    */
+    
+    this.deletePoll = function (req, res) {
+        del({_id: new mongodb.ObjectID(req.body.selectedpoll)}, function(){
+            res.send(true);
+        });
+    };
+    
     this.getPolls = function (req, res) {
         read({}, 
             {_id: 1, pollname: 1, polloptions: 1}, 
             function(documents){
                 res.send(documents);
+            });
+    };
+    
+    /*
+        Generic database functions
+    */
+    this.getPolls = function (callback) {
+        read({}, 
+            {_id: 1, pollname: 1, polloptions: 1}, 
+            function(documents){
+                callback(documents);
             });
     };
     
@@ -47,12 +68,6 @@ function databaseController (db) {
             { $inc: operation },
             callback
         );
-    };
-
-    this.deletePoll = function (req, res) {
-        del({_id: new mongodb.ObjectID(req.body.selectedpoll)}, function(){
-            res.send(true);
-        });
     };
     
     function showCollection(){

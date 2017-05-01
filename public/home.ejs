@@ -10,12 +10,13 @@
         <div class="container">
             <p>Existing polls</p>
             <br/>
-            <form id="pollList"></form>
+            <div id="pollList">
+                <% for(var i=0; i<existingpolls.length; i++){ %>
+                    <a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a>
+                <% } %>
+            </div>
         </div>
         
         <% include ../public/partials/footer %>
-        
-        <script type="text/javascript" src="/controllers/httpRequest.client.js"></script>
-        <script type="text/javascript" src="/controllers/homeController.client.js"></script>
     </body>
 </html>

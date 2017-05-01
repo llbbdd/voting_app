@@ -14,12 +14,14 @@ module.exports = function(app, db) {
     */
     app.route('/')
         .get(function(req, res) {
-            res.render('home', {displayname: getUserDisplayName(req)});
+            res.redirect('home');
         });
 
     app.route('/home')
         .get(function(req, res) {
-            res.render('home', {displayname: getUserDisplayName(req)});
+            pollDb.getPolls(function(pollData){
+                res.render('home', {displayname: getUserDisplayName(req), existingpolls: pollData});
+            });
         });
 
     app.route('/sign-in')
