@@ -19,7 +19,7 @@ module.exports = function(app, db) {
 
     app.route('/home')
         .get(function(req, res) {
-            pollDb.getPolls(function(pollData){
+            pollDb.getPollList(function(pollData){
                 res.render('home', {displayname: getUserDisplayName(req), existingpolls: pollData});
             });
         });

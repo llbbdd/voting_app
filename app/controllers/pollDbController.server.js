@@ -26,7 +26,7 @@ function databaseController (db) {
     /*
         Generic database functions
     */
-    this.getPolls = function (callback) {
+    this.getPollList = function (callback) {
         read({}, 
             {_id: 1, pollname: 1, polloptions: 1}, 
             function(documents){
