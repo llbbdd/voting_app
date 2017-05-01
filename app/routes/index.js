@@ -62,12 +62,12 @@ module.exports = function(app, db) {
     app.route('/poll-choice')
         .get(function(req, res) {
             pollDb.getPollOptions(req.query.pollId, function(pollData){
-                res.render('poll-choice', {displayname: getUserDisplayName(req), poll: pollData});
+                res.render('poll-choice', {displayname: getUserDisplayName(req), polldata: pollData[0]});
             });
         }).post(function(req, res) {
             pollDb.incrementPollOption(req.body.pollId, req.body.polloption, function(){
                 pollDb.getPollResults(req.body.pollId, function(pollData){
-                    res.render('poll-results', {displayname: getUserDisplayName(req), poll: pollData});
+                    res.render('poll-results', {displayname: getUserDisplayName(req), polldata: pollData[0]});
                 });
             });
         });

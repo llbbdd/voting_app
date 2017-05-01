@@ -8,12 +8,12 @@
         <% include ../public/partials/header %>
         
         <div class="container">
-            <%= poll[0].pollname %>
+            <%= polldata.pollname %>
             </br>
             <form id="pollList" action="/poll-choice" method="post">
-                <input type="hidden" name="pollId" value="<%= poll[0]._id %>">
-                <% for(var i=0; i<poll[0].polloptions.length; i++){ %>
-                    <input type="radio" name="polloption" value="<%="option" + i %>"><%= poll[0].polloptions[i];%></br>
+                <input type="hidden" name="pollId" value="<%= polldata._id %>">
+                <% for(var i=0; i<polldata.pollOptions.length; i++){ %>
+                    <input type="radio" name="polloption" value="<%="option" + i %>"><%= polldata.pollOptions[i];%></br>
                 <% } %>
                 <input type="submit" value="Submit">
             </form>

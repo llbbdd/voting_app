@@ -36,7 +36,7 @@ function databaseController (db) {
     
     this.getPollOptions = function (pollId, callback) {
         read({_id: new ObjectID(pollId)},
-            {pollname: 1, polloptions: 1},
+            {pollname: 1, pollOptions: 1},
             function(poll){
                 callback(poll);
             });
