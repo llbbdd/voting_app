@@ -60,12 +60,12 @@ function databaseController (db) {
     };
     
     this.incrementPollOption = function (pollId, pollOption, callback) {
-        var operation = {};
-        operation[pollOption] = 1;
+        var pollVoteReference = {};
+        pollVoteReference["pollVotes." + pollOption] = 1;
 
         update(
             {_id: new ObjectID(pollId)},
-            { $inc: operation },
+            { $inc: pollVoteReference },
             callback
         );
     };
@@ -135,8 +135,8 @@ function databaseController (db) {
     function calculateTotalVotes(poll){
         var total = 0;
         
-        for(var i=0; i<poll[0].polloptions.length; i++){
-            total += poll[0]["option" + i];
+        for(var i=0; i<poll[0].pollVotes.length; i++){
+            total += poll[0].pollVotes[i];
         }
         
         return total;

@@ -13,7 +13,7 @@
             <form id="pollList" action="/poll-choice" method="post">
                 <input type="hidden" name="pollId" value="<%= polldata._id %>">
                 <% for(var i=0; i<polldata.pollOptions.length; i++){ %>
-                    <input type="radio" name="polloption" value="<%="option" + i %>"><%= polldata.pollOptions[i];%></br>
+                    <input type="radio" name="polloption" value="<%= i %>"><%= polldata.pollOptions[i];%></br>
                 <% } %>
                 <input type="submit" value="Submit">
             </form>
