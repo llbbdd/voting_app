@@ -108,8 +108,17 @@ module.exports = function(app, db) {
         ).post(
             ensureLoggedIn('sign-in'),
             function(req, res) {
-                console.log(req.body.pollname);
-                res.redirect('author-dashboard');
+                var optionNumber = 0;
+                var options = [];
+                
+                do{
+                    options[optionNumber] = req.body["option" + optionNumber];
+                    optionNumber++;
+                }while(req.body["option" + optionNumber] != null);
+                
+                pollDb.addPoll(req.body.pollname, req.user._id, options, function(){
+                    res.redirect('author-dashboard');
+                });
             }
         );
         

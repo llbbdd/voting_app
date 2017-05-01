@@ -30,12 +30,11 @@ function databaseController (db) {
             });
     };
     
-    this.addPoll = function (req, res) {
-        var pollName = req.body.selectedpoll;
-    
-        create({ 'pollname': pollName},
-            function(){
-              res.send(true);
+    this.addPoll = function (pollName, pollOwner, pollOptions, callback) {
+        var initialVoteCount = Array.apply(null, Array(pollOptions.length)).map(Number.prototype.valueOf,0);
+        
+        create({ 'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(){
+              callback();
             });
     };
     
