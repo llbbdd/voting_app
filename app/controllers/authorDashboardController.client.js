@@ -2,7 +2,6 @@
 /* global httpRequest*/
 
 (function() {
-   var addButton = document.getElementById('add-button');
    var deleteButton = document.getElementById('delete-button');
    var editButton = document.getElementById('edit-button');
    var pollDiv = document.getElementById("pollList");
@@ -47,14 +46,6 @@
    }
    
    ready(getExistingPolls());
-   
-   addButton.addEventListener('click', function () {
-      var newPollName = document.getElementById("newpoll");
-      
-      httpRequest('POST', pollsApiUrl + "addpoll", {selectedpoll: newPollName.value}, function () {
-         getExistingPolls();
-      });
-   }, false);
    
    editButton.addEventListener('click', function () {
       var selectedPoll = document.querySelector('input[name = "polls"]:checked');
