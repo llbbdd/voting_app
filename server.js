@@ -6,6 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb').MongoClient;
 var routes = require('./app/routes/index.js');
 var favicon = require('serve-favicon');
+var bodyParser = require('body-parser');
 var path = require('path');
 var userDbController = require(process.cwd() + '/app/controllers/userDbController.server.js');
 
@@ -58,7 +59,8 @@ mongo.connect(MONGO_DB_NAME, function (err, db) {
 
     app.use(favicon(path.join(__dirname, 'public/img', 'favicon.ico')));
     app.use(require('cookie-parser')());
-    app.use(require('body-parser').urlencoded({ extended: true }));
+    app.use(bodyParser.json()); 
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
     app.use('/public', express.static(process.cwd() + '/public'));
     app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
