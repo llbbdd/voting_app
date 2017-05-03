@@ -16,7 +16,7 @@ function databaseController (db) {
     };
     
     this.getPolls = function (req, res) {
-        read({}, 
+        read({pollOwner: req.user._id}, 
             {_id: 1, pollname: 1, polloptions: 1}, 
             function(documents){
                 res.send(documents);
