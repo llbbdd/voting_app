@@ -12,7 +12,7 @@
             <br/>
             <div id="pollList">
                 <% for(var i=0; i<existingpolls.length; i++){ %>
-                    <a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a>
+                    <a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a></br>
                 <% } %>
             </div>
         </div>
