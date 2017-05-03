@@ -92,12 +92,12 @@ module.exports = function(app, db) {
         .get(
             ensureLoggedIn('sign-in'),
             function(req, res) {
-                res.render('poll-edit');
+                res.render('poll-edit', {displayname: getUserDisplayName(req)});
             }
         ).post(
             ensureLoggedIn('sign-in'),
             function(req, res) {
-                res.redirect('poll-edit');
+                res.redirect('poll-edit', {displayname: getUserDisplayName(req)});
             }
         );
 
