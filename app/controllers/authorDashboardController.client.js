@@ -50,7 +50,7 @@
    editButton.addEventListener('click', function () {
       var selectedPoll = document.querySelector('input[name = "polls"]:checked');
       
-      window.location.href = "poll-edit.html?poll=" + selectedPoll.value;
+      window.location.href = "poll-edit?poll=" + selectedPoll.value;
    }, false);
    
    deleteButton.addEventListener('click', function () {
