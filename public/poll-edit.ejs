@@ -6,13 +6,20 @@
     
     <body>
         <% include ../public/partials/header %>
-        
         <div class="container">
-            Poll name: <span id="pollName"></span>
-            <div id="pollOptions"></div>
-            <div class="btn-container">
-                <button class="btn btn-create-poll">Create</button>
-            </div>
+            <br/>
+            <p>Poll editor</p>
+            <br/>
+            <form action="/poll-edit" method="post">
+                <input type="hidden" name="pollId" id="pollId" value="<%= pollId %>">
+                Poll name <input type="text" name="pollname" id="pollname"><br>
+                <div id="optionlist">
+                    Option 1<input type="text" name="option0" id="option0"><br>
+                    Option 2<input type="text" name="option1" id="option1"><br>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+            <button id="add-option-button" class="btn btn-edit">Add option</button></br>
         </div>
         
         <% include ../public/partials/footer %>

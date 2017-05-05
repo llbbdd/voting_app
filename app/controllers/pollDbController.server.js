@@ -15,6 +15,14 @@ function databaseController (db) {
         });
     };
     
+    this.getPoll = function(req, res){
+        read({pollOwner: req.user._id, _id: new ObjectID(req.body.pollId)}, 
+            {_id: 1, pollname: 1, pollOptions: 1}, 
+            function(documents){
+                res.send(documents[0]);
+            });
+    };
+    
     this.getPolls = function (req, res) {
         read({pollOwner: req.user._id}, 
             {_id: 1, pollname: 1, polloptions: 1}, 
@@ -57,6 +65,14 @@ function databaseController (db) {
         create({ 'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(){
               callback();
             });
+    };
+    
+    this.replacePoll = function(pollId, userId, pollName, pollOptions, callback){
+        console.log(pollId + " " + userId +" "+ pollName + " " + pollOptions);
+        update(
+            {_id: new ObjectID(pollId), pollOwner: new ObjectID(userId)},
+            {$set: {pollname: pollName, pollOptions: pollOptions}},
+            callback);
     };
     
     this.incrementPollOption = function (pollId, pollOption, callback) {

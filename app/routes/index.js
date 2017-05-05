@@ -92,20 +92,7 @@ module.exports = function(app, db) {
         .get(
             ensureLoggedIn('sign-in'),
             function(req, res) {
-                res.render('poll-edit', {displayname: getUserDisplayName(req)});
-            }
-        ).post(
-            ensureLoggedIn('sign-in'),
-            function(req, res) {
-                res.redirect('poll-edit', {displayname: getUserDisplayName(req)});
-            }
-        );
-
-    app.route('/poll-add')
-        .get(
-            ensureLoggedIn('sign-in'),
-            function(req, res) {
-                res.render('poll-add', {displayname: getUserDisplayName(req)});
+                res.render('poll-edit', {displayname: getUserDisplayName(req), pollId: req.query.poll});
             }
         ).post(
             ensureLoggedIn('sign-in'),
@@ -118,9 +105,18 @@ module.exports = function(app, db) {
                     optionNumber++;
                 }while(req.body["option" + optionNumber] != null);
                 
-                pollDb.addPoll(req.body.pollname, req.user._id, options, function(){
-                    res.redirect('author-dashboard');
-                });
+                if(req.body.pollId === ""){
+                    // Poll is new
+                    pollDb.addPoll(req.body.pollname, req.user._id, options, function(){
+                        res.redirect('author-dashboard');
+                    });
+                }
+                else{
+                    // Poll is being edited
+                    pollDb.replacePoll(req.body.pollId, req.user._id, req.body.pollname, options, function(){
+                        res.redirect('author-dashboard');
+                    });
+                }
             }
         );
         
@@ -142,7 +138,10 @@ module.exports = function(app, db) {
     */
     app.route('/api/polls/getpolls')
         .get(pollDb.getPolls);
-
+    
+    app.route('/api/polls/getpoll')
+        .post(pollDb.getPoll);
+        
     app.route('/api/polls/addpoll')
         .post(pollDb.addPoll);
 
