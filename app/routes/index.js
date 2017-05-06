@@ -81,11 +81,6 @@ module.exports = function(app, db) {
             function(req, res){
                 res.render('author-dashboard', {displayname: getUserDisplayName(req)});
             }
-        ).post(
-            ensureLoggedIn('sign-in'),
-            function(req, res) {
-                res.render('author-dashboard', {displayname: getUserDisplayName(req)});
-            }
         );
         
     app.route('/poll-edit')
@@ -122,11 +117,6 @@ module.exports = function(app, db) {
         
     app.route('/poll-url')
         .get(
-            ensureLoggedIn('sign-in'),
-            function(req, res) {
-                res.render('poll-url');
-            }
-        ).post(
             ensureLoggedIn('sign-in'),
             function(req, res) {
                 res.render('poll-url');
