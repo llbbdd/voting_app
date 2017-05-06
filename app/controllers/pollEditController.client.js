@@ -1,5 +1,6 @@
 'use strict';
-/* global httpRequest*/
+/* global httpRequest */
+/* global GetParameters */
 
 (function() {
    var addOptionButton = document.getElementById('add-option-button');
@@ -21,34 +22,13 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   var QueryString = function () {
-      var query_string = {};
-      var query = window.location.search.substring(1);
-      var vars = query.split("&");
-      
-      for (var i=0;i<vars.length;i++) {
-         var pair = vars[i].split("=");
-         
-         if (typeof query_string[pair[0]] === "undefined") {
-            query_string[pair[0]] = decodeURIComponent(pair[1]);
-         } else if (typeof query_string[pair[0]] === "string") {
-            var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
-            query_string[pair[0]] = arr;
-         } else {
-            query_string[pair[0]].push(decodeURIComponent(pair[1]));
-         }
-      }
-      
-      return query_string;
-   }();
-   
    function getExistingPoll(pollId, callback){
       httpRequest('POST', pollsApiUrl + "getpoll", {pollId: pollId}, callback);
    }
    
    function populatePoll(){
-      if(QueryString){
-         getExistingPoll(QueryString.poll, function(pollData){
+      if(GetParameters){
+         getExistingPoll(GetParameters.poll, function(pollData){
             var poll = JSON.parse(pollData);
             
             pollNameText.value = poll.pollname;

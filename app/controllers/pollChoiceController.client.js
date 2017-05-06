@@ -1,28 +1,12 @@
 'use strict';
-/* global httpRequest*/
+/* global httpRequest */
+/* global GetParameters */
 
 (function() {
-   var pollId = findGetParameter("pollId");
-   window.alert(pollId);
+   var pollId = GetParameters.pollId;
    var pollName = document.getElementById("pollName");
    var pollDiv = document.getElementById("pollOptions");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
-   
-   function findGetParameter(parameterName) {
-      var result = null;
-      var tmp = [];
-      var items = window.location.search.substr(1).split("&");
-      
-      for (var i=0; i<items.length; i++) {
-         tmp = items[i].split("=");
-         
-         if (tmp[0] === parameterName){
-            result = decodeURIComponent(tmp[1]);
-         }
-      }
-      
-      return result;
-   }
 
    function ready(fn) {
       if (typeof fn !== 'function') {
