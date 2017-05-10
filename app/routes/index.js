@@ -102,8 +102,8 @@ module.exports = function(app, db) {
                 
                 if(req.body.pollId === ""){
                     // Poll is new
-                    pollDb.addPoll(req.body.pollname, req.user._id, options, function(){
-                        res.redirect('author-dashboard');
+                    pollDb.addPoll(req.body.pollname, req.user._id, options, function(pollId){
+                        res.redirect('poll-url?pollId=' + pollId);
                     });
                 }
                 else{
@@ -119,7 +119,7 @@ module.exports = function(app, db) {
         .get(
             ensureLoggedIn('sign-in'),
             function(req, res) {
-                res.render('poll-url');
+                res.render('poll-url', {displayname: getUserDisplayName(req), pollId: req.query.pollId});
             }
         );
         
