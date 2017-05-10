@@ -23,7 +23,7 @@
    }
    
    function getExistingPoll(pollId, callback){
-      httpRequest('POST', pollsApiUrl + "getpoll", {pollId: pollId}, callback);
+      httpRequest('GET', pollsApiUrl + "getpoll?pollId=" + pollId, null, callback);
    }
    
    function populatePoll(){

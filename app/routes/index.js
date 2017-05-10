@@ -130,7 +130,7 @@ module.exports = function(app, db) {
         .get(pollDb.getPolls);
     
     app.route('/api/polls/getpoll')
-        .post(pollDb.getPoll);
+        .get(pollDb.getPoll);
         
     app.route('/api/polls/getresults')
         .get(pollDb.getResults);

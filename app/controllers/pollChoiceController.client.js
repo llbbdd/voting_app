@@ -45,7 +45,7 @@
    }
    
    function getPoll(){
-      httpRequest('POST', pollsApiUrl + "getpoll", {pollId: pollId}, populatePoll);
+      httpRequest('GET', pollsApiUrl + "getpoll?pollId=" + pollId, null, populatePoll);
    }
    
    ready(getPoll());
