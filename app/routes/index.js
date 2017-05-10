@@ -66,8 +66,8 @@ module.exports = function(app, db) {
             });
         }).post(function(req, res) {
             pollDb.incrementPollOption(req.body.pollId, req.body.polloption, function(){
-                pollDb.getPollResults(req.body.pollId, function(pollData){
-                    res.render('poll-results', {displayname: getUserDisplayName(req), polldata: pollData[0]});
+                pollDb.getPollName(req.body.pollId, function(pollName){
+                    res.render('poll-results', {displayname: getUserDisplayName(req), pollId: req.body.pollId, pollName: pollName});
                 });
             });
         });

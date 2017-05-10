@@ -44,7 +44,7 @@ function databaseController (db) {
     */
     this.getPollList = function (callback) {
         read({}, 
-            {_id: 1, pollname: 1, polloptions: 1}, 
+            {_id: 1, pollname: 1}, 
             function(documents){
                 callback(documents);
             });
@@ -52,18 +52,17 @@ function databaseController (db) {
     
     this.getPollOptions = function (pollId, callback) {
         read({_id: new ObjectID(pollId)},
-            {pollname: 1, pollOptions: 1},
+            {_id: 1, pollname: 1, pollOptions: 1},
             function(poll){
                 callback(poll);
             });
     };
 
-    this.getPollResults = function (pollId, callback) {
+    this.getPollName = function (pollId, callback) {
         read({_id: new ObjectID(pollId)},
-            {},
+            {_id: 1, pollname: 1},
             function(poll){
-                poll[0]["totalvotes"] = calculateTotalVotes(poll);
-                callback(poll);
+                callback(poll.pollname);
             });
     };
     

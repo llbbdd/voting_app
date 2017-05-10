@@ -9,12 +9,12 @@
         <% include ../public/partials/header %>
 
         <div class="container">
-            <%= polldata.pollname %></br>
+            <%= pollName %></br>
 
             <svg id="visualisation" class="chart" width="600" height="200"></svg>
         </div>
 
-        <input type="hidden" id="pollId" value="<%= polldata._id %>"/>
+        <input type="hidden" id="pollId" value="<%= pollId %>"/>
         <% include ../public/partials/footer %>
 
         <script type="text/javascript" src="/controllers/pollResultsController.client.js"></script>
