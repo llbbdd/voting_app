@@ -33,6 +33,20 @@ img {
     color: #FFA000;
 }
 
+/****** Chart Styling ******/
+
+.chart{
+  fill: green;
+}
+
+.chart-bar:hover {
+  fill: brown;
+}
+
+.chart-text {
+  fill: white;
+}
+
 /****** Click Styling ******/
 
 .btn-container {    /* Styling for the div that contains the buttons */

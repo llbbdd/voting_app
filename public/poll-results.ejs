@@ -2,18 +2,21 @@
 <html>
     <head>
         <% include ../public/partials/head %>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
     </head>
-    
+
     <body>
         <% include ../public/partials/header %>
-        
+
         <div class="container">
             <%= polldata.pollname %></br>
-            <% for(var i=0; i<polldata.pollVotes.length; i++){ %>
-                <%= polldata.pollOptions[i]%> <%= Math.floor((polldata.pollVotes[i] / polldata.totalvotes) * 100) %>%</br>
-            <% } %>
+
+            <svg id="visualisation" class="chart" width="600" height="200"></svg>
         </div>
-        
+
+        <input type="hidden" id="pollId" value="<%= polldata._id %>"/>
         <% include ../public/partials/footer %>
+
+        <script type="text/javascript" src="/controllers/pollResultsController.client.js"></script>
     </body>
 </html>
