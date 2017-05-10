@@ -31,6 +31,14 @@ function databaseController (db) {
             });
     };
     
+    
+    this.getResults = function(req, res){
+        read({_id: new ObjectID(req.query.pollId)}, 
+            {_id: 1, pollname: 1, pollOptions: 1, pollVotes: 1}, 
+            function(documents){
+                res.send(documents[0]);
+            });
+    };
     /*
         Generic database functions
     */

@@ -132,6 +132,9 @@ module.exports = function(app, db) {
     app.route('/api/polls/getpoll')
         .post(pollDb.getPoll);
         
+    app.route('/api/polls/getresults')
+        .get(pollDb.getResults);
+        
     app.route('/api/polls/addpoll')
         .post(pollDb.addPoll);
 
