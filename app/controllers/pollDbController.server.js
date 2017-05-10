@@ -70,8 +70,8 @@ function databaseController (db) {
     this.addPoll = function (pollName, pollOwner, pollOptions, callback) {
         var initialVoteCount = Array.apply(null, Array(pollOptions.length)).map(Number.prototype.valueOf,0);
         
-        create({ 'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(){
-              callback();
+        create({ 'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(newPollId){
+              callback(newPollId);
             });
     };
     
@@ -111,7 +111,7 @@ function databaseController (db) {
                     throw err;
                 }
                 
-                callback();
+                callback(result.ops[0]._id);
             }
         );
     }
