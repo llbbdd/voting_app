@@ -23,7 +23,7 @@
             <ul class="list-group">
                 <div id="pollList">
                     <% for(var i=0; i<existingpolls.length; i++){ %>
-                        <li class="list-group-item"><a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a></li>
+                        <li class="list-group-item"><a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a><span class="badge"><%= existingpolls[i].pollVotes.reduce((a, b) => a + b); %></span></li>
                     <% } %>
                 </div>
             </ul>

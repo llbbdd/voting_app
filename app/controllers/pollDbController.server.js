@@ -44,7 +44,7 @@ function databaseController (db) {
     */
     this.getPollList = function (callback) {
         read({}, 
-            {_id: 1, pollname: 1}, 
+            {_id: 1, pollname: 1, pollVotes: 1}, 
             function(documents){
                 callback(documents);
             });
