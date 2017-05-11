@@ -26,7 +26,7 @@ module.exports = function(app, db) {
 
     app.route('/sign-in')
         .get(function(req, res) {
-            res.render('sign-in', {displayname: null});
+            res.render('sign-in', {displayname: ""});
         }).post(
             passport.authenticate('local', {
                 failureRedirect: 'sign-in'
@@ -38,8 +38,9 @@ module.exports = function(app, db) {
 
     app.route('/sign-up')
         .get(function(req, res) {
-            res.render('sign-up', {displayname: null});
+            res.render('sign-up', {displayname: ""});
         }).post(function(req, res) {
+            console.log("sf");
             userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(newUser){
                 req.login(newUser, function(err) {
                     if(err){
