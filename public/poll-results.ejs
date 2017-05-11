@@ -6,15 +6,15 @@
     </head>
 
     <body>
-        <% include ../public/partials/header %>
-
         <div class="container">
-            <%= pollName %></br>
+            <% include ../public/partials/header %>
+            <h3><%= pollName %></h3>
 
             <svg id="visualisation" class="chart" width="600" height="200"></svg>
+    
+            <input type="hidden" id="pollId" value="<%= pollId %>"/>
         </div>
-
-        <input type="hidden" id="pollId" value="<%= pollId %>"/>
+        
         <% include ../public/partials/footer %>
 
         <script type="text/javascript" src="/controllers/pollResultsController.client.js"></script>

@@ -1,11 +1,22 @@
-<div class="container">
-    <img src="/public/img/vote.png" width="62" height="72"/>
-    <br/>
-    <p class="heading-text">FreeCodeCamp Voting App</p>
-    <% if(displayname !== ""){%>
-        Hello <%= displayname %> <a href="/log-out">Sign out</a>
-    <% }else{%>
-        <a href="/sign-in">Sign in</a>
-        <a href="/sign-up">Sign up</a>
-    <% }%>
+<div class="header clearfix">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2>Voting App</h2>
+        </div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+            <% if(displayname !== ""){%>
+                <h5 class="text-muted">Hi <%= displayname %>, welcome back</h5>
+            <% } %>
+        </div>
+        <div class="col-sm-3">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <% if(displayname !== ""){%>
+                        <li role="presentation"><a href="/log-out">Sign out</a></li>
+                    <% }%>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </div>

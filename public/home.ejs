@@ -5,16 +5,28 @@
     </head>
     
     <body>
-        <% include ../public/partials/header %>
-        
         <div class="container">
-            <p>Existing polls</p>
-            <br/>
-            <div id="pollList">
-                <% for(var i=0; i<existingpolls.length; i++){ %>
-                    <a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a></br>
+            <% include ../public/partials/header %>
+            
+            <div class="jumbotron">
+                <h1>Free Codecamp</h1>
+                <p class="lead">Welcome to my voting app. Sign in, sign up or browse existing polls.</p>
+                <% if(displayname === ""){ %>
+                    <p>
+                        <a class="btn btn-lg btn-success" href="/sign-in" role="button">Sign in</a>
+                        <a class="btn btn-lg btn-success" href="/sign-up" role="button">Sign up</a>
+                    </p>
                 <% } %>
             </div>
+      
+            <h3>Existing polls</h3>
+            <ul class="list-group">
+                <div id="pollList">
+                    <% for(var i=0; i<existingpolls.length; i++){ %>
+                        <li class="list-group-item"><a href='<%= "poll-choice?pollId=" + existingpolls[i]._id %>'><%= existingpolls[i].pollname %></a></li>
+                    <% } %>
+                </div>
+            </ul>
         </div>
         
         <% include ../public/partials/footer %>

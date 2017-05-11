@@ -5,16 +5,15 @@
     </head>
     
     <body>
-        <% include ../public/partials/header %>
         <div class="container">
-            <br/>
-            <p>Existing polls</p>
-            <br/>
-            <form id="pollList"></form> 
-            <div class="btn-container">
-                <button id="delete-button" class="btn btn-delete">Delete</button>
-                <button id="edit-button" class="btn btn-edit">Edit</button></br>
-                <a href="poll-edit" class="btn btn-add" role="button">Add</a>
+            <% include ../public/partials/header %>
+            <h3>Existing polls</h3>
+            <form id="pollList"></form>
+            <br>
+            <div class="btn-group">
+                <a href="poll-edit" class="btn btn-primary" role="button">Add</a>
+                <button type="button" id="edit-button" class="btn btn-primary">Edit</button>
+                <button type="button" id="delete-button" class="btn btn-primary">Delete</button>
             </div>
         </div>
         

@@ -5,17 +5,18 @@
     </head>
     
     <body>
-        <% include ../public/partials/header %>
-        
         <div class="container">
-            <%= polldata.pollname %>
-            </br>
+            <% include ../public/partials/header %>
+            <h3><%= polldata.pollname %></h3>
             <form id="pollList" action="/poll-choice" method="post">
                 <input type="hidden" name="pollId" value="<%= polldata._id %>">
                 <% for(var i=0; i<polldata.pollOptions.length; i++){ %>
-                    <input type="radio" name="polloption" value="<%= i %>"><%= polldata.pollOptions[i];%></br>
+                    <div class="form-group">
+                        <label for="radio<%= i %>"><%= polldata.pollOptions[i];%>:</label>
+                        <input type="radio" name="polloption" id="radio<%= i %>" value="<%= i %>">
+                    </div>
                 <% } %>
-                <input type="submit" value="Submit">
+                <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
         

@@ -5,21 +5,20 @@
     </head>
     
     <body>
-        <% include ../public/partials/header %>
-        
         <div class="container">
-            Sign up
-            <br/>
+            <% include ../public/partials/header %>
+            <h3>Sign up</h3>
             <form action="/sign-up" method="post">
-                Username: <input type="text" id="username" name="username">
-            	<br/>
-            	Password: <input type="password" id="password" name="password">
-            	<br/>
-                Display name: <input type="text" id="displayName" name="displayName">
-            	<br/>
-            	Email: <input type="text" id="email" name="email">
-            	<br/>
-            	<button type="submit">Sign up</button>
+                <label for="username" class="sr-only">Email address</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                <label for="displayname" class="sr-only">Display name</label>
+                <input type="text" id="displayname" name="displayname" class="form-control" placeholder="Display name" required>
+                <label for="email" class="sr-only">Email address</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required>
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
             </form>
         </div>
         

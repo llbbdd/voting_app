@@ -5,20 +5,29 @@
     </head>
     
     <body>
-        <% include ../public/partials/header %>
         <div class="container">
-            <br/>
-            <p>Poll editor</p>
-            <br/>
+            <% include ../public/partials/header %>
+            <h3>Poll editor</h3>
             <form action="/poll-edit" method="post">
                 <input type="hidden" name="pollId" id="pollId" value="<%= pollId %>">
-                Poll name <input type="text" name="pollname" id="pollname"><br>
-                <div id="optionlist">
-                    Option 1<input type="text" name="option0" id="option0"><br>
-                    Option 2<input type="text" name="option1" id="option1"><br>
+                <div class="form-group">
+                    <label for="pollname">Poll name:</label>
+                    <input type="text" class="form-control" name="pollname" id="pollname">
                 </div>
-                <button type="button" id="add-option-button" class="btn btn-edit">Add option</button></br>
-                <input type="submit" class="btn btn-edit" value="Submit">
+                <div id="optionlist">
+                    <div class="form-group">
+                        <label for="option0">Option 1:</label>
+                        <input type="text" class="form-control" name="option0" id="option0">
+                    </div>
+                    <div class="form-group">
+                        <label for="option1">Option 2:</label>
+                        <input type="text" class="form-control" name="option1" id="option1">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="button" id="add-option-button" class="btn btn-primary">Add option</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
         

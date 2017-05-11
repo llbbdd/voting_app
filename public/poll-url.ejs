@@ -5,11 +5,10 @@
     </head>
     
     <body>
-        <% include ../public/partials/header %>
-        
         <div class="container">
-            New poll added<br>
-            URL: <a href="http://dynamic-web-application-projects-generalwellbeing.c9users.io/poll-choice?pollId=<%= pollId %>">link</a>
+            <% include ../public/partials/header %>
+            <h3>New poll added</h3>
+            <h4>URL: <a href="http://dynamic-web-application-projects-generalwellbeing.c9users.io/poll-choice?pollId=<%= pollId %>">link</a></h4>
         </div>
         
         <% include ../public/partials/footer %>
