@@ -3,7 +3,7 @@
 
 var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
 var pollId = document.getElementById('pollId').value;
-var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 d3.json(pollsApiUrl + "getresults?pollId=" + pollId, function(data){
         const svg = d3.select("svg");
@@ -33,7 +33,7 @@ d3.json(pollsApiUrl + "getresults?pollId=" + pollId, function(data){
             .enter()
             .append("text")
             .text((d, i) => alphabet[i] + " (" + data.pollVotes[i] + ")")
-            .attr("x", (d, i) => margin.left + (i * (barWidth + barGap)))
-            .attr("y", (d, i) => svgHeight - margin.bottom)
+            .attr("x", (d, i) => margin.left + (i * (barWidth + barGap)) + 3)
+            .attr("y", (d, i) => svgHeight - margin.bottom - 4)
             .attr("class", "chart-text");
     });
