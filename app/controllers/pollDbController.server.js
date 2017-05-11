@@ -75,7 +75,6 @@ function databaseController (db) {
     };
     
     this.replacePoll = function(pollId, userId, pollName, pollOptions, callback){
-        console.log(pollId + " " + userId +" "+ pollName + " " + pollOptions);
         update(
             {_id: new ObjectID(pollId), pollOwner: new ObjectID(userId)},
             {$set: {pollname: pollName, pollOptions: pollOptions}},
