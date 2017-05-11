@@ -22,7 +22,6 @@
    
    function populatePoll(data) {
       var pollObject = JSON.parse(data);
-      var pollName = pollObject.name;
       var pollOptions = pollObject.options;
       var docfrag = document.createDocumentFragment();
       
