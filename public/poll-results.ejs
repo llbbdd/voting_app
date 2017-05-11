@@ -21,6 +21,12 @@
                     <% } %>
                 </div>
             </ul>
+            
+            <% if(displayname === ""){ %>
+                <a href="home" class="btn btn-primary" role="button">Close</a>
+            <% } else { %>
+                <a href="author-dashboard" class="btn btn-primary" role="button">Close</a>
+            <% } %>
         </div>
         
         <% include ../public/partials/footer %>
