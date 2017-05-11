@@ -58,11 +58,11 @@ function databaseController (db) {
             });
     };
 
-    this.getPollName = function (pollId, callback) {
+    this.getPollText = function (pollId, callback) {
         read({_id: new ObjectID(pollId)},
-            {_id: 1, pollname: 1},
+            {_id: 1, pollname: 1, pollOptions: 1},
             function(poll){
-                callback(poll.pollname);
+                callback(poll[0]);
             });
     };
     

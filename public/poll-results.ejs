@@ -13,6 +13,14 @@
             <svg id="visualisation" class="chart" width="600" height="200"></svg>
     
             <input type="hidden" id="pollId" value="<%= pollId %>"/>
+        
+            <ul class="list-group">
+                <div id="pollList">
+                    <% for(var i=0; i<pollOptions.length; i++){ %>
+                        <li class="list-group-item"><%= String.fromCharCode(65 + i)%> <%= pollOptions[i] %></li>
+                    <% } %>
+                </div>
+            </ul>
         </div>
         
         <% include ../public/partials/footer %>

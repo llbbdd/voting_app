@@ -40,7 +40,6 @@ module.exports = function(app, db) {
         .get(function(req, res) {
             res.render('sign-up', {displayname: ""});
         }).post(function(req, res) {
-            console.log("sf");
             userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(newUser){
                 req.login(newUser, function(err) {
                     if(err){
@@ -67,8 +66,8 @@ module.exports = function(app, db) {
             });
         }).post(function(req, res) {
             pollDb.incrementPollOption(req.body.pollId, req.body.polloption, function(){
-                pollDb.getPollName(req.body.pollId, function(pollName){
-                    res.render('poll-results', {displayname: getUserDisplayName(req), pollId: req.body.pollId, pollName: pollName});
+                pollDb.getPollText(req.body.pollId, function(pollText){
+                    res.render('poll-results', {displayname: getUserDisplayName(req), pollId: req.body.pollId, pollName: pollText.pollname, pollOptions: pollText.pollOptions});
                 });
             });
         });
