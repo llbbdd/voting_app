@@ -17,7 +17,7 @@ function databaseController (db) {
     
     this.getPoll = function(req, res){
         read({_id: new ObjectID(req.query.pollId)}, 
-            {_id: 1, pollname: 1, pollOptions: 1}, 
+            {_id: 1, pollname: 1, pollOptions: 1},
             function(documents){
                 res.send(documents[0]);
             });
@@ -25,7 +25,7 @@ function databaseController (db) {
     
     this.getPolls = function (req, res) {
         read({pollOwner: req.user._id}, 
-            {_id: 1, pollname: 1, polloptions: 1}, 
+            {_id: 1, pollname: 1, pollOptions: 1}, 
             function(documents){
                 res.send(documents);
             });
@@ -67,7 +67,8 @@ function databaseController (db) {
     };
     
     this.addPoll = function (pollName, pollOwner, pollOptions, callback) {
-        var initialVoteCount = Array.apply(null, Array(pollOptions.length)).map(Number.prototype.valueOf,0);
+        // Prepare zero-filled array for initial votes
+        var initialVoteCount = Array.apply(null, Array(pollOptions.length)).map(Number.prototype.valueOf, 0);
         
         create({ 'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(newPollId){
               callback(newPollId);
@@ -77,7 +78,7 @@ function databaseController (db) {
     this.replacePoll = function(pollId, userId, pollName, pollOptions, callback){
         update(
             {_id: new ObjectID(pollId), pollOwner: new ObjectID(userId)},
-            {$set: {pollname: pollName, pollOptions: pollOptions}},
+            {$set: {pollname: pollName, pollOptions: pollOptions}, $push: {pollVotes : 0}},
             callback);
     };
     
