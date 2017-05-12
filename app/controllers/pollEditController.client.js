@@ -12,7 +12,7 @@
    var optionsCounter = 0;
    
    function populatePoll(){
-      if(GetParameters){
+      if(GetParameters.poll !== undefined){
          httpRequest('GET', pollsApiUrl + "getpoll?pollId=" + GetParameters.poll, null, function(pollData){
             var poll = JSON.parse(pollData);
             
