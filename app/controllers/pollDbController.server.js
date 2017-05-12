@@ -10,22 +10,22 @@ function databaseController (db) {
     */
     
     this.deletePoll = function (req, res) {
-        del({_id: new mongodb.ObjectID(req.body.selectedpoll)}, function(){
+        del({'_id': new mongodb.ObjectID(req.body.selectedpoll)}, function(){
             res.send(true);
         });
     };
     
     this.getPoll = function(req, res){
-        read({_id: new ObjectID(req.query.pollId)}, 
-            {_id: 1, pollname: 1, pollOptions: 1},
+        read({'_id': new ObjectID(req.query.pollId)}, 
+            {'_id': 1, 'pollname': 1, 'pollOptions': 1},
             function(documents){
                 res.send(documents[0]);
             });
     };
     
     this.getPolls = function (req, res) {
-        read({pollOwner: req.user._id}, 
-            {_id: 1, pollname: 1, pollOptions: 1}, 
+        read({'pollOwner': req.user._id}, 
+            {'_id': 1, 'pollname': 1, 'pollOptions': 1}, 
             function(documents){
                 res.send(documents);
             });
@@ -33,8 +33,8 @@ function databaseController (db) {
     
     
     this.getResults = function(req, res){
-        read({_id: new ObjectID(req.query.pollId)}, 
-            {_id: 1, pollname: 1, pollOptions: 1, pollVotes: 1}, 
+        read({'_id': new ObjectID(req.query.pollId)}, 
+            {'_id': 1, 'pollname': 1, 'pollOptions': 1, 'pollVotes': 1}, 
             function(documents){
                 res.send(documents[0]);
             });
@@ -44,23 +44,23 @@ function databaseController (db) {
     */
     this.getPollList = function (callback) {
         read({}, 
-            {_id: 1, pollname: 1, pollVotes: 1}, 
+            {'_id': 1, 'pollname': 1, 'pollVotes': 1}, 
             function(documents){
                 callback(documents);
             });
     };
     
     this.getPollOptions = function (pollId, callback) {
-        read({_id: new ObjectID(pollId)},
-            {_id: 1, pollname: 1, pollOptions: 1},
+        read({'_id': new ObjectID(pollId)},
+            {'_id': 1, 'pollname': 1, 'pollOptions': 1},
             function(poll){
                 callback(poll);
             });
     };
 
     this.getPollText = function (pollId, callback) {
-        read({_id: new ObjectID(pollId)},
-            {_id: 1, pollname: 1, pollOptions: 1},
+        read({'_id': new ObjectID(pollId)},
+            {'_id': 1, 'pollname': 1, 'pollOptions': 1},
             function(poll){
                 callback(poll[0]);
             });
@@ -70,15 +70,15 @@ function databaseController (db) {
         // Prepare zero-filled array for initial votes
         var initialVoteCount = Array.apply(null, Array(pollOptions.length)).map(Number.prototype.valueOf, 0);
         
-        create({ 'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(newPollId){
+        create({'pollname': pollName, 'pollOwner': pollOwner, 'pollOptions': pollOptions, 'pollVotes': initialVoteCount}, function(newPollId){
               callback(newPollId);
             });
     };
     
     this.replacePoll = function(pollId, userId, pollName, pollOptions, callback){
         update(
-            {_id: new ObjectID(pollId), pollOwner: new ObjectID(userId)},
-            {$set: {pollname: pollName, pollOptions: pollOptions}, $push: {pollVotes : 0}},
+            {'_id': new ObjectID(pollId), 'pollOwner': new ObjectID(userId)},
+            {$set: {'pollname': pollName, 'pollOptions': pollOptions}, $push: {'pollVotes' : 0}},
             callback);
     };
     
@@ -87,7 +87,7 @@ function databaseController (db) {
         pollVoteReference["pollVotes." + pollOption] = 1;
 
         update(
-            {_id: new ObjectID(pollId)},
+            {'_id': new ObjectID(pollId)},
             { $inc: pollVoteReference },
             callback
         );
