@@ -1,23 +1,12 @@
 'use strict';
 /* global httpRequest*/
+/* global ready */
 
 (function() {
    var deleteButton = document.getElementById('delete-button');
    var editButton = document.getElementById('edit-button');
    var pollDiv = document.getElementById("pollList");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
-   
-   function ready(fn) {
-      if (typeof fn !== 'function') {
-         return;
-      }
-
-      if (document.readyState === 'complete') {
-         return fn();
-      }
-
-      document.addEventListener('DOMContentLoaded', fn, false);
-   }
    
    function populatePollList(data) {
       var pollsObject = JSON.parse(data);

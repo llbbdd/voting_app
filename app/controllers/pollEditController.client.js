@@ -1,6 +1,7 @@
 'use strict';
 /* global httpRequest */
 /* global GetParameters */
+/* global ready */
 
 (function() {
    var addOptionButton = document.getElementById('add-option-button');
@@ -9,18 +10,6 @@
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
    var optionsCounter = 0;
-   
-   function ready(fn) {
-      if (typeof fn !== 'function') {
-         return;
-      }
-
-      if (document.readyState === 'complete') {
-         return fn();
-      }
-
-      document.addEventListener('DOMContentLoaded', fn, false);
-   }
    
    function populatePoll(){
       if(GetParameters){
