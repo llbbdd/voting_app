@@ -40,7 +40,7 @@ module.exports = function(app, db) {
         .get(function(req, res) {
             res.render('sign-up', {displayname: ""});
         }).post(function(req, res) {
-            userDb.addUser(req.body.username, req.body.password, req.body.displayName, req.body.email, function(newUser){
+            userDb.addUser(req.body.username, req.body.password, req.body.displayname, req.body.email, function(newUser){
                 req.login(newUser, function(err) {
                     if(err){
                         throw err; 
