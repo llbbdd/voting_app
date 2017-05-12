@@ -151,19 +151,6 @@ function databaseController (db) {
             }
         );
     }
-    
-    /*
-        Helper functions
-    */
-    function calculateTotalVotes(poll){
-        var total = 0;
-        
-        for(var i=0; i<poll[0].pollVotes.length; i++){
-            total += poll[0].pollVotes[i];
-        }
-        
-        return total;
-    }
 }
 
 module.exports = databaseController;
