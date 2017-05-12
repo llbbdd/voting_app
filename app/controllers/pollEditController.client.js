@@ -34,11 +34,7 @@
             pollNameText.value = poll.pollname;
             
             for(var i=0; i<poll.pollOptions.length; i++){
-               if(i>1){
-                  addOption();
-               }
-               
-               document.getElementById('option' + i).value = poll.pollOptions[i];
+               addOption(poll.pollOptions[i]);
             }
          });
       }
@@ -47,19 +43,28 @@
    ready(populatePoll());
    
    addOptionButton.addEventListener('click', function () {
-      addOption();
-      optionsCounter++;
+      addOption("");
    }, false);
-   
-   function addOption(){
-      optionListDiv.appendChild(document.createTextNode("Option " + (3 + optionsCounter)));
+                    
+   function addOption(optionText){
+      var optionDiv = document.createElement("div");
+      optionDiv.setAttribute("class", "form-group");
       
-      var optionTextInput = document.createElement("input");
-      optionTextInput.type = "text";
-      optionTextInput.name = "option" + (2 + optionsCounter);
-      optionTextInput.id = "option" + (2 + optionsCounter);
-      optionListDiv.appendChild(optionTextInput);
+      var optionLabel = document.createElement("label");
+      optionLabel.setAttribute("for", "option" + optionsCounter);
+      optionLabel.appendChild(document.createTextNode("Option " + (optionsCounter + 1) + ":"));
       
-      optionListDiv.appendChild(document.createElement("br"));
+      var optionInput = document.createElement("input");
+      optionInput.setAttribute("type", "text");
+      optionInput.setAttribute("class", "form-control");
+      optionInput.setAttribute("name", "option" + optionsCounter);
+      optionInput.setAttribute("id", "option" + optionsCounter);
+      optionInput.value = optionText;
+      
+      optionDiv.appendChild(optionLabel);
+      optionDiv.appendChild(optionInput);
+      optionListDiv.appendChild(optionDiv);
+      
+      optionsCounter++;
    }
 })();
