@@ -8,26 +8,40 @@
    var pollDiv = document.getElementById("pollList");
    var pollsApiUrl = 'http://dynamic-web-application-projects-generalwellbeing.c9users.io/api/polls/';
    
+   var optionsCounter = 0;
+   
    function populatePollList(data) {
       var pollsObject = JSON.parse(data);
-      var docfrag = document.createDocumentFragment();
       
       while(pollDiv.firstChild){
          pollDiv.removeChild(pollDiv.firstChild);
       }
       
       for(var i=0; i<pollsObject.length; i++){
-         var optionRadioInput = document.createElement("input");
-         optionRadioInput.type = "radio";
-         optionRadioInput.value = pollsObject[i]._id;
-         optionRadioInput.name = "polls";
-
-         docfrag.appendChild(optionRadioInput);
-         docfrag.appendChild(document.createTextNode(pollsObject[i].pollname));
-         docfrag.appendChild(document.createElement("br"));
+         addOption(pollsObject[i].pollname, pollsObject[i]._id);
       }
+   }
+   
+   function addOption(optionText, optionId){
+      console.log(optionText + " " + optionId);
+      var optionDiv = document.createElement("div");
+      optionDiv.setAttribute("class", "form-group");
       
-      pollDiv.appendChild(docfrag);
+      var optionLabel = document.createElement("label");
+      optionLabel.setAttribute("for", "option" + optionsCounter);
+      optionLabel.appendChild(document.createTextNode(optionText));
+      
+      var optionInput = document.createElement("input");
+      optionInput.setAttribute("type", "radio");
+      optionInput.setAttribute("name", "polls");
+      optionInput.setAttribute("id", "option" + optionsCounter);
+      optionInput.setAttribute("value", optionId);
+      
+      optionDiv.appendChild(optionInput);
+      optionDiv.appendChild(optionLabel);
+      pollDiv.appendChild(optionDiv);
+      
+      optionsCounter++;
    }
    
    function getExistingPolls(){
@@ -49,5 +63,6 @@
          getExistingPolls();
       });
       
+      optionsCounter--;
    }, false);
 })();
