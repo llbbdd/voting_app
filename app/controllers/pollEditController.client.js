@@ -22,13 +22,9 @@
       document.addEventListener('DOMContentLoaded', fn, false);
    }
    
-   function getExistingPoll(pollId, callback){
-      httpRequest('GET', pollsApiUrl + "getpoll?pollId=" + pollId, null, callback);
-   }
-   
    function populatePoll(){
       if(GetParameters){
-         getExistingPoll(GetParameters.poll, function(pollData){
+         httpRequest('GET', pollsApiUrl + "getpoll?pollId=" + GetParameters.poll, null, function(pollData){
             var poll = JSON.parse(pollData);
             
             pollNameText.value = poll.pollname;
