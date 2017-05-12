@@ -23,7 +23,6 @@
    }
    
    function addOption(optionText, optionId){
-      console.log(optionText + " " + optionId);
       var optionDiv = document.createElement("div");
       optionDiv.setAttribute("class", "form-group");
       
