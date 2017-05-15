@@ -53,3 +53,15 @@
       optionsCounter++;
    }
 })();
+
+function validateForm(){
+   if(document.getElementById("option1") == null && 
+      document.getElementById("option1") !== "" &&
+      document.getElementById("option0") !== "" &&
+      document.getElementById('pollname') !== ""){
+      return false;
+   }
+   else{
+      return true;
+   }
+}

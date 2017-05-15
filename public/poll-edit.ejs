@@ -8,7 +8,7 @@
         <div class="container">
             <% include ../public/partials/header %>
             <h3>Poll editor</h3>
-            <form action="/poll-edit" method="post">
+            <form action="/poll-edit" method="post" onsubmit="return validateForm()">
                 <input type="hidden" name="pollId" id="pollId" value="<%= pollId %>">
                 <div class="form-group">
                     <label for="pollname">Poll name:</label>
