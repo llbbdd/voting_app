@@ -8,7 +8,7 @@
         <div class="container">
             <% include ../public/partials/header %>
             <h3><%= polldata.pollname %></h3>
-            <form id="pollList" action="/poll-choice" method="post">
+            <form id="pollList" action="/poll-choice" method="post" onsubmit="return validateForm()">
                 <input type="hidden" name="pollId" value="<%= polldata._id %>">
                 <% for(var i=0; i<polldata.pollOptions.length; i++){ %>
                     <div class="form-group">
@@ -24,5 +24,6 @@
         
         <script type="text/javascript" src="/controllers/httpRequest.client.js"></script>
         <script type="text/javascript" src="/controllers/getParameters.client.js"></script>
+        <script type="text/javascript" src="/controllers/pollChoiceController.client.js"></script>
     </body>
 </html>

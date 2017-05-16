@@ -52,16 +52,20 @@
    editButton.addEventListener('click', function () {
       var selectedPoll = document.querySelector('input[name = "polls"]:checked');
       
-      window.location.href = "poll-edit?poll=" + selectedPoll.value;
+      if(selectedPoll !== null){
+         window.location.href = "poll-edit?poll=" + selectedPoll.value;
+      }
    }, false);
    
    deleteButton.addEventListener('click', function () {
       var selectedPoll = document.querySelector('input[name = "polls"]:checked');
       
-      httpRequest('POST', pollsApiUrl + "deletepoll", {selectedpoll: selectedPoll.value}, function () {
-         getExistingPolls();
-      });
-      
-      optionsCounter--;
+      if(selectedPoll !== null){
+         httpRequest('POST', pollsApiUrl + "deletepoll", {selectedpoll: selectedPoll.value}, function () {
+            getExistingPolls();
+         });
+         
+         optionsCounter--;
+      }
    }, false);
 })();

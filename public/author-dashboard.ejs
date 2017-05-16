@@ -8,7 +8,7 @@
         <div class="container">
             <% include ../public/partials/header %>
             <h3>Existing polls</h3>
-            <form id="pollList"></form>
+            <form id="pollList" onsubmit="return validateForm()"></form>
             <br>
             <div class="btn-group">
                 <a href="poll-edit" class="btn btn-primary" role="button">Add</a>
