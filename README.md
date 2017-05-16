@@ -29,6 +29,7 @@ The app uses the Clementine.js framework along with the following packages:
   * "express-session": - Session middleware
   * "mongodb" - Document-oriented database for poll and user login data
   * "passport" - User authentication
+  * "D3" - Data visualization to render poll results as a bar chart
   
 All user stories are fulfilled. I would have liked to add the following features but have had to draw a line underneath this particular project to move onto the next:
 
